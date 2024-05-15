@@ -8,6 +8,7 @@ const cors = require("cors");
 app.use(cors());
 app.use(express.json());
 
+var host = '192.168.0.103';
 const port = 5000;
 const con = mysql.createConnection(config.db);
 con.connect(function (err) {
@@ -32,6 +33,6 @@ app.get("/stats", async (req, res) => {
     }
 });
 
-app.listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}`);
+app.listen(port, host, () => {
+    console.log(`Listening at ${host}:${port}`);
 });

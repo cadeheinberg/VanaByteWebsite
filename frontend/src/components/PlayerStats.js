@@ -6,7 +6,7 @@ const PlayerStats = () => {
 
     const getStats = async () => {
         try {
-            const response = await fetch("http://localhost:5000/stats");
+            const response = await fetch("http://64.135.202.81:5000/stats");
             const jsonData = await response.json();
             setPlayerRows(jsonData)
         } catch (err) {
