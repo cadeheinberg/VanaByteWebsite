@@ -1,31 +1,35 @@
 var mysql = require('mysql');
 const express = require("express");
-const config = require('./db');
-
 const app = express();
-const port = 3000;
+const config = require('./db');
+const cors = require("cors");
+
+//middleware
+app.use(cors());
 app.use(express.json());
 
+const port = 5000;
 const con = mysql.createConnection(config.db);
 con.connect(function (err) {
     if (err) throw err;
     console.log("Connected!");
 });
 
-app.get('/stats', (req, res) => {
-    con.query("SELECT * FROM hub_stats", function (err, result, fields) {
-        if (err) throw err;
-        console.log(result);
-        res.json(result)
-    });
+console.log("Test Query:")
+con.query("SELECT * FROM hub_stats LIMIT 1", function (err, result, fields) {
+    if (err) throw err;
+    console.log(result);
 });
 
-app.get('/stats/:id', (req, res) => {
-    con.query("SELECT * FROM hub_stats WHERE UUID == ?", req.params, function (err, result, fields) {
-        if (err) throw err;
-        console.log(result);
-        res.json(result)
-    });
+app.get("/stats", async (req, res) => {
+    try {
+        con.query("SELECT * FROM hub_stats", function (err, result, fields) {
+            if (err) throw err;
+            res.json(result);
+        });
+    } catch (err) {
+        console.error(err.message);
+    }
 });
 
 app.listen(port, () => {
