@@ -1,20 +1,38 @@
 * {
   margin: 0rem;
   padding: 0rem;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: aliceblue;
+}
+
+#root {
+  width: 500px;
+  max-width: 500px;
+  margin: auto;
 }
 
 .App {
-  max-width: fit-content;
-  margin: auto;
-  margin-top: 5rem;
+  margin-top: 4rem;
   font-size: 1.3rem;
+  position: relative;
+  max-width: 100%;
+  padding: 0.5rem
+}
+
+
+table {
+  table-layout: fixed;
+  width: 100%;
 }
 
 .table th {
   background-color: rgb(59, 255, 213);
-  font-size: 1.5rem;
-  padding: 1rem;
-  padding-bottom: .1;
+  font-size: 1rem;
+  padding-top: .2rem;
+  padding-bottom: .2rem;
 }
 
 .table td {
@@ -26,5 +44,19 @@
 
 .table td:first-child {
   text-align: left;
-  font-weight: 600
+}
+
+table td:nth-child(2) {
+  text-align: left;
+}
+
+table th:first-child,
+table td:first-child {
+  width: 6%;
+}
+
+table th:nth-child(2),
+table td:nth-child(2) {
+  width: 36%;
+
 }

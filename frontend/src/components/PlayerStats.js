@@ -4,6 +4,8 @@ const PlayerStats = () => {
 
     const [playerRows, setPlayerRows] = useState([])
 
+    let rowID = 1;
+
     const getStats = async () => {
         try {
             const response = await fetch("http://64.135.202.81:5000/stats");
@@ -21,13 +23,15 @@ const PlayerStats = () => {
     }, []);
 
     return <Fragment>
+        <h3>VanaByte.com (Minecraft 1.19.4)</h3>
         <table className="table">
             <thead>
                 <tr>
-                    <th>Minecraft Name</th>
-                    <th>Cakes (money)</th>
+                    <th></th>
+                    <th>Player</th>
+                    <th>Cakes</th>
                     <th>Level</th>
-                    <th>Experience</th>
+                    <th>Exp</th>
                     <th>Kills</th>
                     <th>Deaths</th>
                 </tr>
@@ -42,6 +46,7 @@ const PlayerStats = () => {
                 */}
                 {playerRows.map(player => (
                     <tr key={player.UUID}>
+                        <td>{rowID++}</td>
                         <td>{player.PlayerName}</td>
                         <td>{player.server_cakes}</td>
                         <td>{player.server_level}</td>
