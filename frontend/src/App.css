@@ -5,21 +5,26 @@
 }
 
 body {
-  background-color: aliceblue;
+  background: url(ABVewCv-minecraft-background.jpg);
+  background-size: auto;
+  background-repeat: no-repeat;
+  background-position: 44% 0%;
 }
 
 #root {
-  width: 500px;
-  max-width: 500px;
+  max-width: 90%;
+  width: 90%;
   margin: auto;
 }
 
 .App {
-  margin-top: 4rem;
-  font-size: 1.3rem;
+  margin-top: 1rem;
   position: relative;
   max-width: 100%;
-  padding: 0.5rem
+  background-color: white;
+  border-radius: 1rem;
+  padding: .5rem;
+  padding-bottom: 1rem;
 }
 
 
@@ -30,14 +35,14 @@ table {
 
 .table th {
   background-color: rgb(59, 255, 213);
-  font-size: 1rem;
+  font-size: .5rem;
   padding-top: .2rem;
   padding-bottom: .2rem;
 }
 
 .table td {
   background-color: rgb(228, 230, 230);
-  font-size: 1.5rem;
+  font-size: .5rem;
   padding: .1rem;
   text-align: right;
 }
@@ -52,11 +57,11 @@ table td:nth-child(2) {
 
 table th:first-child,
 table td:first-child {
-  width: 6%;
+  width: 5%;
 }
 
 table th:nth-child(2),
 table td:nth-child(2) {
-  width: 36%;
+  width: 22%;
 
 }

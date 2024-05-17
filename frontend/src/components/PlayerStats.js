@@ -23,7 +23,7 @@ const PlayerStats = () => {
     }, []);
 
     return <Fragment>
-        <h3>VanaByte.com (Minecraft 1.19.4)</h3>
+        <h3>VanaByte.com (Minecraft 1.20.X)</h3>
         <table className="table">
             <thead>
                 <tr>

@@ -20,10 +20,9 @@ var con = null;
 
 function handleConnection() {
     console.log("Establishing a new connection to database")
-    con = mysql.createConnection(config.db);
 
     //here we are creating a function that takes in error
-    const connectionError = function (err) {
+    const connectionErrorHandling = function (err) {
         if (err) {
             console.log('Database Error 1', err);
             //retry connection later
@@ -38,7 +37,8 @@ function handleConnection() {
     //inside of connection method it will 
     //call "connectionError(null)" if sucessful, or
     //call "connectionError(errInfo)" if not successful
-    con.connect(connectionError);
+    con = mysql.createPool(config.db, connectionErrorHandling);
+    //con.connect(connectionErrorHandling);
 
     //you could also just put the function within the parameter
     //slot itself instead of defining it before
