@@ -5,10 +5,13 @@
 }
 
 body {
-  background: url(ABVewCv-minecraft-background.jpg);
-  background-size: auto;
-  background-repeat: no-repeat;
-  background-position: 44% 0%;
+  background-color: rgb(248, 246, 246);
+  /* fallback for old browsers */
+  background: #396afc;
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-linear-gradient(to right, #c6946b, #e9bbe8);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: linear-gradient(to right, #eecd9e, #f5cabf);
 }
 
 #root {
@@ -17,11 +20,29 @@ body {
   margin: auto;
 }
 
-.App {
+.header {
+  margin-top: 2rem;
+  background-color: rgb(255, 255, 255);
+  background-image: url("minecraft_background.jpg");
+  border-radius: 1rem;
+  padding: 1rem;
+}
+
+.header .headerText {
+  padding: 1rem;
+  border-radius: 1rem;
+  text-align: center;
+  margin: auto;
+  width: fit-content;
+  background-color: rgb(255, 255, 255);
+}
+
+.playerstats {
   margin-top: 1rem;
   position: relative;
   max-width: 100%;
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.941);
+  box-shadow: 4px 4px rgba(0, 0, 0, 0.062), 0px 0 0em rgba(0, 0, 0, 0.062);
   border-radius: 1rem;
   padding: .5rem;
   padding-bottom: 1rem;
@@ -31,20 +52,25 @@ body {
 table {
   table-layout: fixed;
   width: 100%;
+  min-height: 600px;
 }
 
 .table th {
-  background-color: rgb(59, 255, 213);
-  font-size: .5rem;
+  background-color: rgba(255, 59, 59, 0.376);
+  font-size: 1rem;
   padding-top: .2rem;
   padding-bottom: .2rem;
 }
 
 .table td {
-  background-color: rgb(228, 230, 230);
-  font-size: .5rem;
+  background-color: rgba(228, 230, 230, 0.404);
+  font-size: .9rem;
   padding: .1rem;
   text-align: right;
+}
+
+.table tr:nth-child(even) {
+  background-color: rgb(222, 222, 222);
 }
 
 .table td:first-child {
@@ -62,6 +88,27 @@ table td:first-child {
 
 table th:nth-child(2),
 table td:nth-child(2) {
-  width: 22%;
+  width: 20%;
+
+}
+
+/* Small screens */
+@media only screen and (max-width: 600px) {
+  table {
+    min-height: none;
+  }
+
+  .table th {
+    font-size: .5rem;
+  }
+
+  .table td {
+    font-size: .5rem;
+  }
+
+  table th:nth-child(2),
+  table td:nth-child(2) {
+    width: 22%;
+  }
 
 }

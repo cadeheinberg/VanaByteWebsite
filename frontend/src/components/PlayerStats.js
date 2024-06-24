@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const PlayerStats = () => {
 
@@ -22,8 +22,7 @@ const PlayerStats = () => {
         getStats();
     }, []);
 
-    return <Fragment>
-        <h3>VanaByte.com (Minecraft 1.20.X)</h3>
+    return <div className="playerstats">
         <table className="table">
             <thead>
                 <tr>
@@ -57,7 +56,7 @@ const PlayerStats = () => {
                 ))}
             </tbody>
         </table>
-    </Fragment>;
+    </div>;
 };
 
 export default PlayerStats;
