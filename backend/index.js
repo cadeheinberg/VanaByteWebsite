@@ -1,14 +1,23 @@
 var mysql = require('mysql');
 const express = require("express");
 const app = express();
-const config = require('./db');
 const cors = require("cors");
+require('dotenv').config();
+
+const dbConfig = {
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    port: process.env.DB_PORT,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_DATABASE,
+    connectTimeout: parseInt(process.env.DB_CONNECT_TIMEOUT, 6000)
+};
 
 //middleware
 app.use(cors());
 app.use(express.json());
 
-var host = '192.168.0.103';
+var host = 'localhost';
 const port = 5000;
 var con = null;
 
@@ -37,7 +46,7 @@ function handleConnection() {
     //inside of connection method it will 
     //call "connectionError(null)" if sucessful, or
     //call "connectionError(errInfo)" if not successful
-    con = mysql.createPool(config.db, connectionErrorHandling);
+    con = mysql.createPool(dbConfig, connectionErrorHandling);
     //con.connect(connectionErrorHandling);
 
     //you could also just put the function within the parameter
