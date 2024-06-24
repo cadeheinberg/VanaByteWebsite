@@ -2,14 +2,15 @@
 vanabyte.com
 
 LAUNCHING: 
-1. clone the repo to local
+1. clone the repo to local machine anywhere
+2. i did it to /home/sevenkits/WebHosting/VanaByteWebsite/frontend/build
 
 FRONT END:
 1. cd frontend
 2. npm install (since node_modules are not in repo need to download them according to package.json)
-3. npm run build
-4. apache will run your build folder now, so configure like such
-5. sudo nano /etc/apache2/sites-available/000-default.conf
+4. npm start (for development)
+3. npm run build (for production)
+5. sudo nano /etc/apache2/sites-available/000-default.conf (set apache to run your build folder now)
 6. <VirtualHost *:80>
     ServerName vanabyte.com
     DocumentRoot /home/sevenkits/WebHosting/VanaByteWebsite/frontend/build
@@ -33,14 +34,13 @@ FRONT END:
 </VirtualHost>
 
 BACKEND:
-1. create file ".env" in ./VanaByWebsite/ for db info. Place following info
-2. DB_HOST=localhost
+1. cd backend
+2. create file ".env" in ./VanaByWebsite/backend for db info. Place following info
+3. DB_HOST=localhost
 DB_USER=your_username
 DB_PORT=3306
 DB_PASSWORD=your_password
 DB_DATABASE=your_database
-DB_CONNECT_TIMEOUT=6000
-3. cd backend
 4. npm install (since node_modules are not in repo need to download them according to package.json)
 5. use npx for the following commands since nodemon and pm2 werent installed globally
 6. npx nodemon index.js (for development)
@@ -52,14 +52,16 @@ DB_CONNECT_TIMEOUT=6000
 12. npx pm2 delete 0 (delete specific backend id)
 
 ALL DEPENDENCIES INSTALLS
+(alternatively just use npm list)
 
 FRONTEND:
-1.
+1. none
 
 BACKEND:
 1. npm install dotenv (used for db info)
 2. npm install express
-3. npm install mysql
+3. npm install mysql2
 4. npm install cors
 5. npm install pm2
+6. npm install node
 6. npm install nodemon

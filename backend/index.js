@@ -1,8 +1,14 @@
-var mysql = require('mysql');
+var mysql = require('mysql2');
 const express = require("express");
 const app = express();
 const cors = require("cors");
 require('dotenv').config();
+
+console.log('DB_HOST:', process.env.DB_HOST);
+console.log('DB_USER:', process.env.DB_USER);
+console.log('DB_PORT:', process.env.DB_PORT);
+console.log('DB_PASSWORD:', process.env.DB_PASSWORD);
+console.log('DB_DATABASE:', process.env.DB_DATABASE);
 
 const dbConfig = {
     host: process.env.DB_HOST,
@@ -10,14 +16,14 @@ const dbConfig = {
     port: process.env.DB_PORT,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_DATABASE,
-    connectTimeout: parseInt(process.env.DB_CONNECT_TIMEOUT, 6000)
+    connectTimeout: 6000
 };
 
 //middleware
 app.use(cors());
 app.use(express.json());
 
-var host = 'localhost';
+var host = '192.168.0.103';
 const port = 5000;
 var con = null;
 

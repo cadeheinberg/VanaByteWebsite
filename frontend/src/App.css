@@ -5,6 +5,7 @@
 }
 
 body {
+  height: 60rem;
   background-color: rgb(248, 246, 246);
   /* fallback for old browsers */
   background: #396afc;
@@ -94,6 +95,10 @@ table td:nth-child(2) {
 
 /* Small screens */
 @media only screen and (max-width: 600px) {
+  body {
+    height: 60rem;
+  }
+
   table {
     min-height: none;
   }
