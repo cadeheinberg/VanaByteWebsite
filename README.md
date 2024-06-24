@@ -63,7 +63,7 @@ vanabyte.com
 5. `npx pm2 start/restart 0` (start running specific backend id)
 6. `npx pm2 delete 0` (delete specific backend id)
 
-## **ALL DEPENDENCIES INSTALLED:**
+## **ALL DEPENDENCIES INSTALLED (dont need to do these just listing, npm install should pull them from package.json):**
 (alternatively just use `npm list`)
 **FRONTEND:**
 > 1. none
