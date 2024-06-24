@@ -33,17 +33,23 @@ FRONT END:
 </VirtualHost>
 
 BACKEND:
-1. configure ./.env file for db info
-2. cd backend
-3. npm install (since node_modules are not in repo need to download them according to package.json)
-4. use npx for the following commands since nodemon and pm2 werent installed globally
-5. npx nodemon index.js (for development)
-6. npx pm2 start index.js (for production running)
-7. npx pm2 list (view backends running)
-8. npx pm2 logs 0 (view logs for specific backend id, use CTRL-C to exit logs)
-9. npx pm2 stop 0 (stop running specific backend id)
-10. npx pm2 start/restart 0 (start running specific backend id)
-11. npx pm2 delete 0 (delete specific backend id)
+1. create file ".env" in ./VanaByWebsite/ for db info. Place following info
+2. DB_HOST=localhost
+DB_USER=your_username
+DB_PORT=3306
+DB_PASSWORD=your_password
+DB_DATABASE=your_database
+DB_CONNECT_TIMEOUT=6000
+3. cd backend
+4. npm install (since node_modules are not in repo need to download them according to package.json)
+5. use npx for the following commands since nodemon and pm2 werent installed globally
+6. npx nodemon index.js (for development)
+7. npx pm2 start index.js (for production running)
+8. npx pm2 list (view backends running)
+9. npx pm2 logs 0 (view logs for specific backend id, use CTRL-C to exit logs)
+10. npx pm2 stop 0 (stop running specific backend id)
+11. npx pm2 start/restart 0 (start running specific backend id)
+12. npx pm2 delete 0 (delete specific backend id)
 
 ALL DEPENDENCIES INSTALLS
 
