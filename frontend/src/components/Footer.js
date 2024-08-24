@@ -2,14 +2,15 @@ import React from 'react'
 
 function Footer() {
     return (
-        <div className='flex px-10 justify-between text-white pt-10 pb-20 max-w-[800px] mx-auto'>
+        <div className='flex flex-col sm:flex-row pl-6 sm:px-10 justify-between space-y-5 sm:space-y-0 text-white pt-10 pb-20 max-w-[800px] mx-auto'>
             <ul>
                 <li>Cade Heinberg</li>
-                <li>cadeheinberg@outlook.com</li>
+                <li className='italic'>cadeheinberg@outlook.com</li>
             </ul>
             <ul>
-                <li>Powered By</li>
-                <li>REACT, TailWindCSS, Lottie, react-svg</li>
+                <li className='uppercase text-mygreen'>Powered By</li>
+                <li>REACT, TailWindCSS</li>
+                <li>Lottie, react-svg, react-intersection-observer</li>
                 <li>NodeJS, Express, Cors, MySQL, JWT, Bcrypt</li>
             </ul>
         </div>

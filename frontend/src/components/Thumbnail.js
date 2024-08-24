@@ -1,13 +1,21 @@
-import React from 'react'
+import React from 'react';
+import { useInView } from 'react-intersection-observer';
 
 function Thumbnail(props) {
+    const { ref, inView } = useInView({
+        triggerOnce: false,
+        threshold: 0.1,
+    });
 
-    //onclick go to props.noteid
     return (
-        <div className='w-[90%] sm:w-[50%] p-4'>
+        <div
+            ref={ref}
+            className={`w-[100%] md:w-[50%] py-4 sm:px-4 lg:p-6 transition-opacity duration-1000 ${inView ? 'opacity-100' : 'opacity-0'}`}
+        >
             <div className='bg-slate-50 rounded-2xl p-2 shadow-md'>
                 <div className='flex'>
-                    <img className='p-2'
+                    <img
+                        className='p-2'
                         src={props.profile_pic}
                         alt="Author"
                         style={{ width: '100px', height: '100px' }}
@@ -20,8 +28,8 @@ function Thumbnail(props) {
                 </div>
                 <p>{props.description}</p>
             </div>
-        </div >
-    )
+        </div>
+    );
 }
 
-export default Thumbnail
+export default Thumbnail;
