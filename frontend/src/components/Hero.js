@@ -3,7 +3,8 @@ import { ReactTyped } from "react-typed";
 
 function Hero() {
     return (
-        <div className="text-white">
+        <div className="text-white bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))]  
+                    from-[#0003259c] via-[#00032568] to-myblack">
             <div className="max-w-[800px] mt-[-96px] w-full h-screen mx-auto text-center flex flex-col justify-center">
                 <p className='uppercase text-mygreen font-bold p-2'>Improving one character at a time</p>
                 <h1 className='md:text-7xl sm:text-6xl text-4xl font-bold pb-2 md:py-3'>Write it right.</h1>

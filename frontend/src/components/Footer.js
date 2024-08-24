@@ -10,7 +10,7 @@ function Footer() {
             <ul>
                 <li className='uppercase text-mygreen'>Powered By</li>
                 <li>REACT, TailWindCSS</li>
-                <li>Lottie, react-svg, react-intersection-observer</li>
+                <li>Lottie, react-svg, framer-motion</li>
                 <li>NodeJS, Express, Cors, MySQL, JWT, Bcrypt</li>
             </ul>
         </div>
