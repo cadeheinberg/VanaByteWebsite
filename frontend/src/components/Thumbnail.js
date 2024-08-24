@@ -1,21 +1,18 @@
 import React from 'react';
-import { useInView } from 'react-intersection-observer';
+import { motion } from 'framer-motion';
 
 function Thumbnail(props) {
-    const { ref, inView } = useInView({
-        triggerOnce: false,
-        threshold: 0.1,
-    });
-
     return (
-        <div
-            ref={ref}
-            className={`w-[100%] md:w-[50%] py-4 sm:px-4 lg:p-6 transition-opacity duration-1000 ${inView ? 'opacity-100' : 'opacity-0'}`}
+        <motion.div
+            className='w-[100%] md:w-[50%] py-4 sm:px-4 lg:p-6'
+            initial={{ opacity: 0, x: -100, y: 100 }}
+            whileInView={{ opacity: 1, x: 0, y: 0 }}
+            transition={{ duration: 1.5 }}
+            viewport={{ once: true, margin: '-50px 0px' }}
         >
             <div className='bg-slate-50 rounded-2xl p-2 shadow-md'>
                 <div className='flex'>
-                    <img
-                        className='p-2'
+                    <img className='p-2'
                         src={props.profile_pic}
                         alt="Author"
                         style={{ width: '100px', height: '100px' }}
@@ -28,7 +25,7 @@ function Thumbnail(props) {
                 </div>
                 <p>{props.description}</p>
             </div>
-        </div>
+        </motion.div>
     );
 }
 
