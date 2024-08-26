@@ -1,24 +1,22 @@
 import React from 'react'
-import Lottie from 'lottie-react';
-import animationNoteTaker from '../assets/notetaker1.json';
-import animationToDo from '../assets/todo1.json';
 
 function NewsLetter() {
     return (
-        <div className='flex flex-col sm:flex-row py-16 px-4 max-w-[1000px] mx-auto'>
-            <div className='sm:w-72 w-[50%] h-full mx-auto'>
-                <Lottie
-                    animationData={animationNoteTaker}
-                    style={{ width: '100%', height: '100%' }} // Ensure the animation scales to fit the container
-                />
-            </div>
-            <div className='flext flex-col'>
-                <h1 className='text-white pt-10 sm:pt-0 text-4xl font-medium text-center sm:text-5xl'>What will you get done?</h1>
-                <div className='w-72 mx-auto'>
-                    <Lottie
-                        animationData={animationToDo}
-                        style={{ width: '100%', height: '100%' }} // Ensure the animation scales to fit the container
-                    />
+        <div className='w-full py-16 text-white px-4'>
+            <div className='max-w-[1240px] mx-auto grid lg:grid-cols-3'>
+                <div className='lg:col-span-2 my-4'>
+                    <h1 className='sigma py-2'>Want to receive updates about NoteTaker?</h1>
+                    <p>Sign up to our newsletter and stay up to date.</p>
+                </div>
+                <div className='my-4'>
+                    <div className='flex flex-col sm:flex-row items-center justify-between w-full'>
+                        <input
+                            className='p-3 flex w-full rounded-md text-black'
+                            type="email" placeholder='Enter Email'>
+                        </input>
+                        <button className='text-myblack bg-mygreen w-[200px] rounded-md font-medium my-6 sm:ml-4 sm:mx-auto py-3 px-6'>Notify Me</button>
+                    </div>
+                    <p>We care about the protection of your data. Read our <a href='/' className='text-mygreen'>Privacy Policy</a>.</p>
                 </div>
             </div>
         </div>

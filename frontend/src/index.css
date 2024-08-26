@@ -2,6 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+    --gradient-text: linear-gradient(89.97deg, #AE67FA 1.84%, #F49867 102.67%);
+}
+
 body {
-    background-color: #000300;
+    @apply bg-myblack
+}
+
+.sigma {
+    @apply text-white md:text-4xl sm:text-3xl text-2xl font-bold
+}
+
+.sigma_gradient_background {
+    background: radial-gradient(circle at 3% 25%, rgb(0, 19, 40) 0%, rgba(4, 12, 24, 1) 25%);
+}
+
+.sigma_gradient_text {
+    background: var(--gradient-text);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
