@@ -31,6 +31,7 @@ function Preview() {
                 <div className='grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-10'>
                     {notes.map((note, index) => (
                         <motion.div
+                            key={index}
                             className='show'
                             initial={{ opacity: 0, x: -100, scale: 0.8, rotate: -10 }}
                             whileInView={{ opacity: 1, x: 0, scale: 1, rotate: 0 }}
@@ -45,7 +46,6 @@ function Preview() {
                             viewport={{ once: true, margin: '-50px 0px' }} // triggers when in view
                         >
                             <Thumbnail
-                                key={index}
                                 noteid={note.noteid}
                                 author={note.author}
                                 profile_pic={note.profile_pic}

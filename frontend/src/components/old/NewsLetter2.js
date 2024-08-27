@@ -18,16 +18,6 @@ function NewsLetter() {
                     <li>Nothing</li>
                 </ul>
             </div>
-            <ul>
-                <li>Cade Heinberg</li>
-                <li className='italic'>cadeheinberg@outlook.com</li>
-            </ul>
-            <ul>
-                <li className='uppercase text-mygreen'>Powered By</li>
-                <li>REACT, TailWindCSS</li>
-                <li>Lottie, react-svg, framer-motion</li>
-                <li>NodeJS, Express, Cors, MySQL, JWT, Bcrypt</li>
-            </ul>
         </div>
     )
 }

@@ -25,9 +25,11 @@ function PaidPlans() {
         <div className='w-full py-[10rem] px-4 bg-white'>
             <div className='max-w-[1240px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-8'>
                 {plans.map((plan, planid) => (
-                    <div className={`w-full shadow-xl flex flex-col p-4 my-8 rounded-lg hover:scale-105 duration-300 ${plan.highlighted ? 'md:my-0 bg-slate-50' : ''}`}>
+                    <div
+                        key={planid}
+                        className={`w-full shadow-xl flex flex-col p-4 my-8 rounded-lg hover:scale-105 duration-300 ${plan.highlighted ? 'md:my-0 bg-slate-50' : ''}`}
+                    >
                         <PlanCard
-                            key={planid}
                             img={plan.img}
                             title={plan.title}
                             price={plan.price}
