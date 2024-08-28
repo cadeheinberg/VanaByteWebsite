@@ -35,10 +35,10 @@ const pool = mysql.createPool(dbConfig, (err, response) => {
 
 const db = pool.promise();
 
-async function createTodosTable() {
+async function createTables() {
     try {
         await db.query(`
-            CREATE TABLE IF NOT EXISTS UserData (
+            CREATE TABLE IF NOT EXISTS ${process.env.DB_TABLE_USER_DATA} (
                 user_id VARCHAR(255) NOT NULL PRIMARY KEY,
                 name VARCHAR(255) NOT NULL,
                 email VARCHAR(255) NOT NULL UNIQUE,
@@ -46,25 +46,25 @@ async function createTodosTable() {
                 profile VARCHAR(255) NOT NULL
             );
         `);
-        console.log("Login table is ready");
+        console.log(process.env.DB_TABLE_USER_DATA + " table is ready");
     } catch (err) {
-        console.error("Error creating todos table:", err.message);
+        console.error("Error creating" + process.env.DB_TABLE_USER_DATA + "table:", err.message);
     }
 }
 
-createTodosTable();
+createTables();
 
 const verifyUser = (req, res, next) => {
-    const token = req.cookies.token;
+    const token = req.cookies[process.env.JWT_COOKIE_NAME];
     if (!token) {
-        return res.json({ Error: "You are not authenticated" })
+        return res.status(204).json({ message: "no token found" });
     } else {
         jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
             if (err) {
-                return res.json({ Error: "Token is not associated with account" })
+                return res.status(400).json({ message: err.message });
             } else {
-                console.log(decoded)
-                req.userId = decoded.userId;
+                req.user_id = decoded.user_id;
+                req.username = decoded.username;
                 next();
             }
         })
@@ -72,53 +72,71 @@ const verifyUser = (req, res, next) => {
 }
 
 app.get("/", verifyUser, async (req, res) => {
-    return res.json({ Status: "Success", userName: req.userId })
-});
-
-app.post("/register", async (req, res) => {
-    //same as: const name = req.body.name;
-    const { name, email, password } = req.body;
-    try {
-        // Hash the password
-        const hash = await bcrypt.hash(password.toString(), salt);
-        const newUserId = uuidv4();
-        console.log(newUserId);
-        const [result] = await db.query("INSERT INTO login (name, email, password) VALUES (?, ?, ?)", [name, email, hash]);
-        res.json({ Status: "Success" });
-    } catch (err) {
-        console.error("Error during registration:", err.message);
-        res.json({ Error: err.message });
-    }
+    return res.status(201).json({
+        message: 'Login successful',
+        user_id: req.user_id,
+        username: req.username
+    });
 });
 
 app.post("/login", async (req, res) => {
-    console.log("login requested")
+    console.log("login requested for ")
+    console.log(req.body);
     const { email, password } = req.body;
     try {
-        const [rows] = await db.query("SELECT * FROM login WHERE email = ?", [email]);
+        const [rows] = await db.query(`SELECT * FROM ${process.env.DB_TABLE_USER_DATA} WHERE email = ?`, [email]);
         if (rows.length === 0) {
-            return res.json({ Error: "No user with that email" });
+            res.status(401).json({ message: 'Invalid credentials' });
         }
-        const hashword = rows[0].password;
-        const isMatch = await bcrypt.compare(password, hashword);
+        const hashWord = rows[0].password;
+        const isMatch = await bcrypt.compare(password, hashWord);
         if (isMatch) {
-            const userName = rows[0].name;
-            console.log(userName + " logged in successfully");
-            const token = jwt.sign({ userName }, process.env.JWT_SECRET, { expiresIn: '1d' });
-            res.cookie('token', token)
-            return res.json({ Status: "Success" });
+            const user_id = rows[0].user_id;
+            const username = rows[0].name;
+            console.log(username + " logged in successfully");
+            const token = jwt.sign({ user_id, username }, process.env.JWT_SECRET, { expiresIn: '1d' });
+            res.cookie(process.env.JWT_COOKIE_NAME, token, {
+                httpOnly: true, // Makes sure the cookie can't be accessed through JavaScript
+                secure: process.env.NODE_ENV === 'production', // Use 'secure' flag only in production
+                sameSite: 'Strict', // or 'Lax' depending on your use case
+                maxAge: 24 * 60 * 60 * 1000 // 1 day
+            });
+            return res.status(201).json({ message: 'Login successful' });
         } else {
-            res.json({ Error: "Incorrect password" });
+            res.status(401).json({ message: 'Invalid credentials' });
         }
     } catch (err) {
         console.error("Error during login:", err.message);
-        res.json({ Error: err.message });
+        return res.status(400).json({ message: err.message });
+    }
+});
+
+app.post("/register", async (req, res) => {
+    console.log("register requested for ")
+    console.log(req.body);
+    //same as: const name = req.body.name;
+    const { username, email, password } = req.body;
+    try {
+        //hash the password
+        const hashWord = await bcrypt.hash(password.toString(), salt);
+        const newUserId = uuidv4();
+        const [result] = await db.query(`INSERT INTO ${process.env.DB_TABLE_USER_DATA} (user_id, name, email, password, profile) VALUES (?, ?, ?, ?, ?)`, [newUserId.toString(), username, email, hashWord, 'none']);
+        return res.status(201).json({ message: 'Registration successful' });
+    } catch (err) {
+        console.log(err)
+        if (err.errno === 1062) {
+            console.error("Error during registration:", err.message);
+            return res.status(400).json({ message: "Oops! An account with that email address already exists" });
+        } else {
+            console.error("Error during registration:", err.message);
+            return res.status(400).json({ message: err.message });
+        }
     }
 });
 
 app.get("/logout", async (req, res) => {
     console.log("logout requested")
-    res.clearCookie('token');
+    res.clearCookie(process.env.JWT_COOKIE_NAME);
     return res.json({ Status: "Success" });
 });
 

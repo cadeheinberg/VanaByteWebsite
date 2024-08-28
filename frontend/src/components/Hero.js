@@ -1,14 +1,15 @@
 import React from 'react'
 import { ReactTyped } from "react-typed";
+import LOGIN_MODE from '../enums/enums';
 
-function Hero({ userData }) {
+function Hero({ userData, openLoginModal }) {
 
     const description = userData ? "Go to Public notes" : 'Start today by signing up, or log in';
     const welcomeMessage = userData ? 'Welcome Back.' : 'Write it Right.';
     const precisionText = userData ? 'Precision notes for ' : 'Precision notes for ';
 
     const greenButton = userData ? <button className='text-myblack bg-mygreen w-[200px] rounded-md font-medium my-6 mx-auto py-3 px-6'>Public</button>
-        : <button className='text-myblack bg-mygreen w-[200px] rounded-md font-medium my-6 mx-auto py-3 px-6'>Sign Up</button>;
+        : <button className='text-myblack bg-mygreen w-[200px] rounded-md font-medium my-6 mx-auto py-3 px-6' onClick={() => { openLoginModal(LOGIN_MODE.register) }}>Sign Up</button>;
 
     return (
         <div className="text-white">
