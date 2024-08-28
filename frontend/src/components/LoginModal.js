@@ -74,7 +74,7 @@ function LoginModal({ isModalOpen, closeModal, displayType, setDisplayType }) {
     return (
         <Modal isOpen={isModalOpen} closeModal={handleCloseLoginModal}>
             <h2 className="text-2xl font-bold my-5 text-myblack border-b">{isRegisterMode() ? 'Create Account' : 'Log In'}</h2>
-            <form onSubmit={isRegisterMode() ? handleRegister : handleLogin} className="w-[300px]">
+            <form onSubmit={isRegisterMode() ? handleRegister : handleLogin} className="w-full">
                 {
                     isRegisterMode()
                         ?
