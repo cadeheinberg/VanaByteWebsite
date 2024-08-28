@@ -3,6 +3,7 @@ import profile1 from "../assets/s1.svg";
 import { AiOutlineClose } from 'react-icons/ai';
 import LOGIN_MODE from '../enums/enums';
 import API_URL from '../config';
+import { Link } from 'react-router-dom'
 
 function Navbar({ userData, openLoginModal }) {
     const [nav, setNav] = useState(false);
@@ -23,11 +24,11 @@ function Navbar({ userData, openLoginModal }) {
 
     const profileLogin = userData ? (
         <Fragment>
-            <h1 className='w-full text-3xl font-bold text-mygreen'>{userData.userName}</h1>
+            <h1 className='w-full text-3xl font-bold text-mygreen hidden sm:inline'>{userData.userName}</h1>
             <ul className="flex font-medium">
-                <li className='p-4 pt-5 hidden sm:block'>Home</li>
-                <li className='p-4 pt-5 hidden sm:block'>Public</li>
-                <li className='p-4 pt-5 hidden sm:block'>MyNotes</li>
+                <li className='p-4 pt-5 hidden sm:block'><Link className='hover:underline' to="/">Store</Link></li>
+                <li className='p-4 pt-5 hidden sm:block'><Link className='hover:underline' to="/stats">Stats</Link></li>
+                <li className='p-4 pt-5 hidden sm:block'><Link className='hover:underline' to="/forums">Forums</Link></li>
                 <li className='pl-2'>
                     <button onClick={handleNav}>
                         <img className='w-max max-w-[60px]'
@@ -36,12 +37,15 @@ function Navbar({ userData, openLoginModal }) {
                         />
                     </button>
                 </li>
-            </ul>
-        </Fragment>
+            </ul >
+        </Fragment >
     ) : (
         <Fragment>
-            <h1 className='w-full text-3xl font-bold text-mygreen'>OnePage</h1>
+            <h1 className='w-full text-3xl font-bold text-mygreen hidden sm:inline'>VanaByte</h1>
             <ul className="flex font-medium">
+                <li className='p-4 pt-5 block'><Link className='hover:underline' to="/">Store</Link></li>
+                <li className='p-4 pt-5 block'><Link className='hover:underline' to="/stats">Stats</Link></li>
+                <li className='p-4 pt-5 block'><Link className='hover:underline' to="/forums">Forums</Link></li>
                 <li className='p-4 bg-white  text-myblack rounded-lg text-nowrap' onClick={() => { openLoginModal(LOGIN_MODE.login) }}>Log In</li>
             </ul>
         </Fragment>
@@ -61,15 +65,15 @@ function Navbar({ userData, openLoginModal }) {
                 </button>
             </div>
             <ul className='p-0 sm:p-4 uppercase'>
-                <li className='p-4 border-b border-gray-600'>MyNotes</li>
-                <li className='p-4 border-b border-gray-600'>Public</li>
-                <li className='p-4 border-b border-gray-600'>Home</li>
+                <li className='p-4 border-b border-gray-600'><Link className='hover:underline' to="/">Store</Link></li>
+                <li className='p-4 border-b border-gray-600'><Link className='hover:underline' to="/stats">Stats</Link></li>
+                <li className='p-4 border-b border-gray-600'><Link className='hover:underline' to="/forums">Forums</Link></li>
                 <li className='p-4 text-nowrap' onClick={handleLogout}>Log Out</li>
             </ul>
         </div>
 
     return (
-        <div className='flex justify-between items-center h-24 max-w-[1240px] mx-auto px-4 text-white '>
+        <div className='flex justify-center sm:justify-between items-center h-24 max-w-[1240px] mx-auto px-4 text-white '>
             {profileLogin}
             {sideBar}
         </div>

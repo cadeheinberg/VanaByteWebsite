@@ -9,6 +9,8 @@ const cookieParser = require("cookie-parser");
 const { v4: uuidv4 } = require('uuid');
 const salt = 10;
 
+const port = 5000;
+
 const app = express();
 app.use(express.json());
 app.use(cors({
@@ -53,6 +55,10 @@ async function createTables() {
 }
 
 createTables();
+
+//////
+////// ROUTING
+//////
 
 const verifyUser = (req, res, next) => {
     const token = req.cookies[process.env.JWT_COOKIE_NAME];
@@ -140,6 +146,16 @@ app.get("/logout", async (req, res) => {
     return res.json({ Status: "Success" });
 });
 
-app.listen(5003, () => {
-    console.log("Nodejs server listening at 5003")
-})
+app.get("/stats", async (req, res) => {
+    console.log("stats hit")
+    try {
+        const [result] = await db.query("SELECT * FROM hub_stats");
+        res.json(result);
+    } catch (err) {
+        if (err) console.error(err.message);
+    }
+});
+
+app.listen(port, () => {
+    console.log(`Listening at http://localhost:${port}`);
+});

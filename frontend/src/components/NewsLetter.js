@@ -5,7 +5,7 @@ function NewsLetter() {
         <div className='w-full py-16 text-white px-4'>
             <div className='max-w-[1240px] mx-auto grid lg:grid-cols-3'>
                 <div className='lg:col-span-2 my-4'>
-                    <h1 className='sigma py-2'>Want to receive updates about NoteTaker?</h1>
+                    <h1 className='sigma py-2'>Want to receive updates about VanaByte?</h1>
                     <p>Sign up to our newsletter and stay up to date.</p>
                 </div>
                 <div className='my-4'>

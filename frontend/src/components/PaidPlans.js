@@ -1,8 +1,8 @@
 import React from 'react'
 import PlanCard from './PlanCard'
-import singleImg from '../assets/single.png'
-import doubleImg from '../assets/double.png'
-import tripleImg from '../assets/triple.png'
+import singleImg from '../assets/iron.png'
+import doubleImg from '../assets/emerald.png'
+import tripleImg from '../assets/diamond.png'
 
 class PlanDetails {
     constructor(img, title, price, description, highlighted) {
@@ -17,9 +17,9 @@ class PlanDetails {
 function PaidPlans() {
 
     let plans = []
-    plans.push(new PlanDetails(singleImg, "Single User", 5.99, ["500 Note Storage", "1 Granted User", "Publish up to 5 Notes"], false))
-    plans.push(new PlanDetails(doubleImg, "Shared Account", 9.99, ["1250 Note Storage", "2 Granted Users", "Publish up to 20 Notes"], true))
-    plans.push(new PlanDetails(tripleImg, "Goup Account", 14.99, ["2000 Note Storage", "5 Granted Users", "Share up to 100 Notes"], false))
+    plans.push(new PlanDetails(singleImg, "VIP", 5.99, ["Billed Monthly", "500 Extra Emotes", "Priority 1 for Game Queues"], false))
+    plans.push(new PlanDetails(doubleImg, "MVP", 9.99, ["Billed Monthly", "1000 Extra Emotes", "Priority 2 for Game Queues"], true))
+    plans.push(new PlanDetails(tripleImg, "MVP+", 79.99, ["Lifetime", "2000 Extra Emotes", "Priority MAX for Game Queues"], false))
 
     return (
         <div className='w-full py-[10rem] px-4 bg-white'>

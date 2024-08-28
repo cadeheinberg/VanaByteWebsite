@@ -4,9 +4,9 @@ import LOGIN_MODE from '../enums/enums';
 
 function Hero({ userData, openLoginModal }) {
 
-    const description = userData ? "Go to Public notes" : 'Start today by signing up, or log in';
-    const welcomeMessage = userData ? 'Welcome Back.' : 'Write it Right.';
-    const precisionText = userData ? 'Precision notes for ' : 'Precision notes for ';
+    const welcomeMessage = userData ? 'Minecraft 1.20.x' : 'Minecraft 1.20.x';
+    const precisionText = userData ? 'Join a game of' : 'Join a game of';
+    const description = userData ? "Sign up to sync your MC account" : 'Sign up to sync your MC account';
 
     const greenButton = userData ? <button className='text-myblack bg-mygreen w-[200px] rounded-md font-medium my-6 mx-auto py-3 px-6'>Public</button>
         : <button className='text-myblack bg-mygreen w-[200px] rounded-md font-medium my-6 mx-auto py-3 px-6' onClick={() => { openLoginModal(LOGIN_MODE.register) }}>Sign Up</button>;
@@ -14,7 +14,7 @@ function Hero({ userData, openLoginModal }) {
     return (
         <div className="text-white">
             <div className="max-w-[800px] mt-[-96px] w-full h-screen mx-auto text-center flex flex-col justify-center">
-                <p className='uppercase text-mygreen font-bold p-2'>Improving one character at a time</p>
+                <p className='uppercase text-mygreen font-bold p-2'>IP: vanabyte.com</p>
                 <h1 className='md:text-7xl sm:text-6xl text-4xl font-bold pb-2 md:py-3'>
                     {welcomeMessage}
                 </h1>
@@ -22,7 +22,7 @@ function Hero({ userData, openLoginModal }) {
                     <p className='pr-2 py-1 sm:py-4 sm:pr-3'>
                         {precisionText}
                     </p>
-                    <ReactTyped className='text-gray-500' strings={["programmers", "engineers", "mathematicians"]} typeSpeed={80} backSpeed={80} loop />
+                    <ReactTyped className='text-gray-500' strings={["Royale", "Ladders", "KitPVP"]} typeSpeed={80} backSpeed={80} loop />
                 </div>
                 <p className='md:text-xl text-lg font-bold text-gray-500'>
                     {description}

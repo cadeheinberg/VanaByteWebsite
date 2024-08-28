@@ -11,7 +11,7 @@ function Footer() {
     return (
         <div className='max-w-[1240px] mx-auto py-16 px-6 grid grid-cols-1 lg:grid-cols-3 gap-10 text-gray-300'>
             <div>
-                <h1 className='w-full text-3xl font-bold text-mygreen'>One Page</h1>
+                <h1 className='w-full text-3xl font-bold text-mygreen'>VanaByte</h1>
                 <p className='py-4'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure do</p>
                 <div className='flex justify-between md:w-[75%] my-6'>
                     <FaFacebookSquare size={30} />
