@@ -27,7 +27,7 @@ function Preview() {
 
     return (
         <div className='bg-white w-full py-16'>
-            <div className=' max-w-[1240px] mx-auto px-4'>
+            <div className='max-w-[1240px] mx-auto px-4'>
                 <div className='grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-10'>
                     {notes.map((note, index) => (
                         <motion.div

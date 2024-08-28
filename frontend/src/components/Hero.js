@@ -13,7 +13,7 @@ function Hero({ userData, openLoginModal }) {
 
     return (
         <div className="text-white">
-            <div className="max-w-[800px] mt-[-96px] w-full h-screen mx-auto text-center flex flex-col justify-center">
+            <div className="max-w-[800px] w-full pt-32 pb-56 mx-auto text-center flex flex-col justify-center">
                 <p className='uppercase text-mygreen font-bold p-2'>IP: vanabyte.com</p>
                 <h1 className='md:text-7xl sm:text-6xl text-4xl font-bold pb-2 md:py-3'>
                     {welcomeMessage}

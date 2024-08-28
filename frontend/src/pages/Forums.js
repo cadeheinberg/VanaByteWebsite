@@ -1,79 +1,26 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Navbar from "../components/Navbar";
-import LoginModal from '../components/LoginModal';
-import LOGIN_MODE from '../enums/enums';
-import API_URL from '../config';
+import Preview from "../components/Preview";
 import Footer from "../components/Footer";
-import Preview from '../components/Preview';
+import LoginModal from '../components/LoginModal';
 
-class UserData {
-    constructor(auth = false, userId = null, userName = null, profileImg = null) {
-        this.auth = auth;
-        this.userId = userId;
-        this.userName = userName;
-        this.profileImg = profileImg;
-    }
-}
-
-function MinecraftStats() {
-    const [userData, setUserData] = useState(null);
-    const [isLoginModalOpen, setLoginModalOpen] = useState(false);
-    const [displayType, setDisplayType] = useState(LOGIN_MODE.register)
-
-    const openLoginModal = (mode) => {
-        setLoginModalOpen(true);
-        console.log(mode)
-        setDisplayType(mode);
-        console.log(displayType)
-    }
-
-    const closeLoginModal = () => setLoginModalOpen(false);
-
-    const fetchUserData = async () => {
-        try {
-            const res = await fetch(`${API_URL}`, {
-                method: 'GET',
-                credentials: 'include'
-            });
-            if (res.ok) {
-                if (res.status === 204) {
-                    console.log("no jwt token found in browser")
-                } else if (res.status === 201) {
-                    const resData = await res.json();
-                    console.log("jwt token found in browser")
-                    console.log(resData);
-                    setUserData(new UserData(true, resData.user_id, resData.username, resData.profileImg));
-                }
-            } else {
-                setUserData(null);
-            }
-        } catch (err) {
-            console.error("Error fetching data:", err.message);
-        }
-    };
-
-    useEffect(() => {
-        fetchUserData();
-    }, []);
-
-
+function Home({ userData, openLoginModal, isLoginModalOpen, closeLoginModal, displayType, setDisplayType }) {
     return (
-        <>
+        <div>
             <Navbar
                 userData={userData}
                 openLoginModal={openLoginModal}
             />
-            <Preview userData={userData} />
+            <Preview>userData={userData}</Preview>
             <Footer userData={userData} />
             <LoginModal
-                isModalOpen={isLoginModalOpen}
-                closeModal={closeLoginModal}
+                isLoginModalOpen={isLoginModalOpen}
+                closeLoginModal={closeLoginModal}
                 displayType={displayType}
                 setDisplayType={setDisplayType}
             />
-        </>
-
-    )
+        </div>
+    );
 }
 
-export default MinecraftStats
+export default Home;

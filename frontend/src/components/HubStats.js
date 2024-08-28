@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import API_URL from '../config';
 
-function HubStats() {
+function HubStats({ userData }) {
 
     const [playerRows, setPlayerRows] = useState([]);
 

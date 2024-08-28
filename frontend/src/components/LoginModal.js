@@ -3,7 +3,7 @@ import Modal from './Modal'
 import LOGIN_MODE from '../enums/enums';
 import API_URL from '../config';
 
-function LoginModal({ isModalOpen, closeModal, displayType, setDisplayType }) {
+function LoginModal({ isLoginModalOpen, closeLoginModal, displayType, setDisplayType }) {
     const [credentials, setCredentials] = useState({
         username: '',
         email: '',
@@ -66,13 +66,13 @@ function LoginModal({ isModalOpen, closeModal, displayType, setDisplayType }) {
     }
 
     const handleCloseLoginModal = () => {
-        closeModal();
+        closeLoginModal();
     };
 
     const isRegisterMode = () => displayType === LOGIN_MODE.register;
 
     return (
-        <Modal isOpen={isModalOpen} closeModal={handleCloseLoginModal}>
+        <Modal isOpen={isLoginModalOpen} closeModal={handleCloseLoginModal}>
             <h2 className="text-2xl font-bold my-5 text-myblack border-b">{isRegisterMode() ? 'Create Account' : 'Log In'}</h2>
             <form onSubmit={isRegisterMode() ? handleRegister : handleLogin} className="w-full">
                 {

@@ -1,26 +1,17 @@
 import React from 'react';
 import Navbar from "../components/Navbar";
-import Hero from "../components/Hero";
-import NewsLetter from "../components/NewsLetter";
-import GamePics from '../components/GamePics';
-import Blog from "../components/Blog";
+import PaidPlans from "../components/PaidPlans";
 import Footer from "../components/Footer";
 import LoginModal from '../components/LoginModal';
 
-function Home({ userData, openLoginModal, isLoginModalOpen, closeLoginModal, displayType, setDisplayType }) {
+function Store({ userData, openLoginModal, isLoginModalOpen, closeLoginModal, displayType, setDisplayType }) {
     return (
         <div>
             <Navbar
                 userData={userData}
                 openLoginModal={openLoginModal}
             />
-            <Hero
-                userData={userData}
-                openLoginModal={openLoginModal}
-            />
-            <GamePics userData={userData} />
-            <NewsLetter userData={userData} />
-            <Blog userData={userData} />
+            <PaidPlans userData={userData} />
             <Footer userData={userData} />
             <LoginModal
                 isLoginModalOpen={isLoginModalOpen}
@@ -32,4 +23,4 @@ function Home({ userData, openLoginModal, isLoginModalOpen, closeLoginModal, dis
     );
 }
 
-export default Home;
+export default Store;
