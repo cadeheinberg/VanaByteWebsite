@@ -1,5 +1,5 @@
 # VanaByteWebsite
-[vanabyte.com](http://vanabyte.com/)
+- Live Site: [vanabyte.com](http://vanabyte.com/)
 
 ## **DEPLOYMENT:**
  1. clone the repo to local machine anywhere
