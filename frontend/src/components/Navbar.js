@@ -73,7 +73,7 @@ function Navbar({ userData, openLoginModal }) {
                         className='hover:cursor-pointer p-4 bg-white text-myblack rounded-full text-nowrap'
                         onClick={handleProfileClick}
                     >
-                        <FaRegUser size={40} color='#000000' />
+                        <FaRegUser size={30} color='#000000' />
                     </li>
                 }
             </ul>
