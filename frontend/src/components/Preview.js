@@ -1,9 +1,9 @@
 import React from 'react';
 import Thumbnail from './Thumbnail';
-import profile1 from "../assets/s1.svg";
-import profile2 from "../assets/s2.svg";
-import profile3 from "../assets/s3.svg";
-import profile4 from "../assets/s4.svg";
+import profile1 from "../assets/defaults/user1_solid.png";
+import profile2 from "../assets/defaults/user1_solid.png";
+import profile3 from "../assets/defaults/user1_solid.png";
+import profile4 from "../assets/defaults/user1_solid.png";
 import { motion } from 'framer-motion';
 
 class NoteDetails {

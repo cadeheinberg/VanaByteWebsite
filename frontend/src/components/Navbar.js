@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import profile1 from "../assets/s2.svg";
+import profile1 from "../assets/defaults/user1_solid.png";
 import { AiOutlineClose } from 'react-icons/ai';
 import API_URL from '../config';
 import { Link } from 'react-router-dom'
