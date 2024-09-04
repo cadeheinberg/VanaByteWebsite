@@ -23,7 +23,7 @@ function PaidPlans() {
     plans.push(new PlanDetails(tripleImg, "MVP+", 79.99, ["Lifetime", "2000 Extra Emotes", "Priority MAX for Game Queues"], false))
 
     return (
-        <div className='w-full pt-[7rem] pb-[10rem] px-4 bg-white'>
+        <div className='w-full pt-[7rem] pb-[10rem] px-4 bg-mywhite'>
             <div className='max-w-[1240px] mx-auto'>
                 <h1 className='text-myblack text-6xl font-bold text-center mb-28 pb-2 pt-2 mx-10'>STORE</h1>
                 {/* <img className='w-[400px] mx-auto mb-24 bg-transparent' src={storeImg} alt="/"></img> */}
@@ -31,7 +31,7 @@ function PaidPlans() {
                     {plans.map((plan, planid) => (
                         <div
                             key={planid}
-                            className={`w-full shadow-xl flex flex-col p-4 my-8 rounded-lg hover:scale-105 duration-300 ${plan.highlighted ? 'md:my-0 bg-slate-50' : ''}`}
+                            className={`w-full shadow-xl flex flex-col p-4 my-8 rounded-lg hover:scale-105 duration-300 bg-white ${plan.highlighted ? 'md:my-0' : ''}`}
                         >
                             <PlanCard
                                 img={plan.img}

@@ -52,38 +52,41 @@ function Navbar({ userData, openLoginModal }) {
                 <li className='border-b border-gray-600'><Link className='inline-block w-full p-4 hover:cursor-pointer hover:underline' to="/stats">Stats</Link></li>
                 <li className='border-b border-gray-600'><Link className='inline-block w-full p-4 hover:cursor-pointer hover:underline' to="/forums">Forums</Link></li>
                 <li className='border-b border-gray-600'><Link className='inline-block w-full p-4 hover:cursor-pointer hover:underline' to="/store">Store</Link></li>
-                <li className='border-b border-gray-600'><Link className='inline-block w-full p-4 hover:cursor-pointer hover:underline' to="/store">Contact</Link></li>
+                <li className='border-b border-gray-600'><Link className='inline-block w-full p-4 hover:cursor-pointer hover:underline' to="/contact">Contact</Link></li>
                 {userData ? <li className='text-mygreen font-bold text-nowrap'><div className='p-4 hover:cursor-pointer hover:underline' onClick={handleLogout}>Log Out</div></li> : null}
             </ul>
         </div >
 
     return (
-        <div className='flex justify-between items-center h-28 max-w-[1240px] mx-auto px-4 text-white '>
-            <h1 className='text-3xl font-bold text-mygreen sm:inline'>{userData ? userData.userName : 'VanaByte'}</h1>
-            <ul className="flex font-medium items-center space-x-0 sm:space-x-6 text-2xl uppercase">
-                <li className='hidden sm:block'><Link className='p-3 hover:underline' to="/">Home</Link></li>
-                <li className='hidden sm:block'><Link className='p-3 hover:underline' to="/stats">Stats</Link></li>
-                <li className='hidden sm:block'><Link className='p-3 hover:underline' to="/forums">Forums</Link></li>
-                <li className='hidden sm:block'><Link className='p-3 hover:underline' to="/store">Store</Link></li>
-                <li className='hidden sm:block'><Link className='p-3 hover:underline' to="/store">Contact</Link></li>
-            </ul>
-            {userData ? <div className='hover:cursor-pointer'>
-                <button onClick={handleProfileClick}>
-                    <img className='w-max max-w-[60px]'
-                        src={profile1}
-                        alt="profile"
-                    />
-                </button>
-            </div> :
-                <div className='hover:cursor-pointer'>
+        <div className='grid grid-cols-7 justify-center items-center h-20 md:h-20 max-w-[1000px] mx-auto px-4 text-white '>
+            <div className='col-span-1'>
+                <h1 className='text-2xl md:text-3xl font-bold text-mygreen'>VanaByte</h1>
+            </div>
+            <div className='col-span-5'>
+                <ul className="mx-auto w-fit max-w-fit flex font-medium items-center space-x-0 sm:space-x-1 md:space-x-6 text-md md:text-2xl uppercase">
+                    <li className='hidden sm:block'><Link className='p-3 hover:underline' to="/">Home</Link></li>
+                    <li className='hidden sm:block'><Link className='p-3 hover:underline' to="/stats">Stats</Link></li>
+                    <li className='hidden sm:block'><Link className='p-3 hover:underline' to="/forums">Forums</Link></li>
+                    <li className='hidden sm:block'><Link className='p-3 hover:underline' to="/store">Store</Link></li>
+                    <li className='hidden sm:block'><Link className='p-3 hover:underline' to="/contact">Contact</Link></li>
+                </ul>
+            </div>
+            <div className='col-span-1 hover:cursor-pointer flex justify-end items-center'>
+                {userData ?
                     <button onClick={handleProfileClick}>
                         <img className='w-max max-w-[60px]'
                             src={profile1}
                             alt="profile"
                         />
                     </button>
-                </div>
-            }
+                    :
+                    <button onClick={handleProfileClick}>
+                        <img className='w-max max-w-[60px]'
+                            src={profile1}
+                            alt="profile"
+                        />
+                    </button>}
+            </div>
             {sideBar}
         </div>
     );

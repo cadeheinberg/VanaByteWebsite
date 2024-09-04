@@ -4,11 +4,11 @@ import LOGIN_MODE from '../enums/enums';
 
 function Hero({ userData, openLoginModal }) {
 
-    const welcomeMessage = userData ? 'Minecraft 1.20.x' : 'Minecraft 1.20.x';
+    const welcomeMessage = userData ? 'Minecraft 1.21' : 'Minecraft 1.21';
     const precisionText = userData ? 'Join a game of' : 'Join a game of';
-    const description = userData ? "Sign up to sync your MC account" : 'Sign up to sync your MC account';
+    const description = userData ? `Welcome back ${userData.userName}` : 'Sign up to sync your MC account';
 
-    const greenButton = userData ? <button className='text-myblack bg-mygreen w-[200px] rounded-md font-medium my-6 mx-auto py-3 px-6'>Public</button>
+    const greenButton = userData ? <button className='text-myblack bg-mygreen w-[200px] rounded-md font-medium my-6 mx-auto py-3 px-6'>View Forums</button>
         : <button className='text-myblack bg-mygreen w-[200px] rounded-md font-medium my-6 mx-auto py-3 px-6' onClick={() => { openLoginModal(LOGIN_MODE.register) }}>Sign Up</button>;
 
     return (

@@ -3,9 +3,9 @@ import { AiFillLike, AiFillDislike } from "react-icons/ai";
 
 function Thumbnail(props) {
     return (
-        <div className='text-slate-600 flex flex-col bg-white rounded-lg p-5 shadow-md border-slate-200 border-l-[5px]'>
-            <div className='flex'>
-                <div className='flex bg-slate-50'>
+        <div className='text-slate-600 flex flex-col bg-white rounded-lg p-2 pb-4 sm:p-5 shadow-md sm:border-slate-200 sm:border-l-[5px]'>
+            <div className='flex flex-col'>
+                <div className='flex '>
                     <div className='w-[100px] p-3'>
                         <img className='w-full'
                             src={props.profile_pic}
@@ -20,15 +20,15 @@ function Thumbnail(props) {
                         </div>
                     </div>
                 </div>
-                <div className='flex items-center pl-6 p-2  w-full'>
-                    <h1 className='font-bold text-4xl'>{props.title}</h1>
+                <div className='flex items-center p-2  w-full'>
+                    <h1 className='font-bold text-2xl sm:text-4xl'>{props.title}</h1>
                 </div>
             </div>
             <div className='border-b-[1px]'>
-                <p className='p-2 py-3 text-lg'>{props.description}</p>
+                <p className='p-2 py-0 pb-1 sm:py-3 text-lg'>{props.description}</p>
             </div>
             <div className=''>
-                <div className='flex gap-x-6 p-4 pb-0'>
+                <div className='flex gap-x-3 sm:gap-x-6 p-2 sm:p-4 pb-0'>
                     <div className='flex gap-x-2'>
                         <span className='font-medium text-lg'>100</span>
                         <span>

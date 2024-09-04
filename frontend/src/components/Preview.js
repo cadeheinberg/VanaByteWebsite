@@ -26,7 +26,7 @@ function Preview() {
 
     return (
         <div className='bg-mywhite w-full pb-8'>
-            <div className='max-w-[900px] mx-auto px-4'>
+            <div className='max-w-[900px] mx-auto p-2 sm:px-4'>
                 <div className='grid grid-cols-1 gap-x-10 gap-y-10'>
                     {notes.map((note, index) => (
                         <Thumbnail

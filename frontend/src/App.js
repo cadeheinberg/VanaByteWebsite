@@ -6,6 +6,7 @@ import Home from './pages/Home';
 import MinecraftStats from "./pages/MinecraftStats";
 import Forums from "./pages/Forums";
 import Store from "./pages/Store";
+import Contact from "./pages/Contact";
 
 class UserData {
   constructor(auth = false, userId = null, userName = null, profileImg = null) {
@@ -86,6 +87,13 @@ function App() {
           displayType={displayType}
           setDisplayType={setDisplayType} />}></Route>
         <Route path='/store' element={<Store
+          userData={userData}
+          openLoginModal={openLoginModal}
+          isLoginModalOpen={isLoginModalOpen}
+          closeLoginModal={closeLoginModal}
+          displayType={displayType}
+          setDisplayType={setDisplayType} />}></Route>
+        <Route path='/contact' element={<Contact
           userData={userData}
           openLoginModal={openLoginModal}
           isLoginModalOpen={isLoginModalOpen}
