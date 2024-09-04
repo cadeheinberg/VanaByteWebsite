@@ -35,9 +35,7 @@ function Footer() {
                     <h2 className='font-medium text-gray-400'>Packages</h2>
                     <ul>
                         <li className='py-2 text-sm'>react-svg</li>
-                        <li className='py-2 text-sm'>framer-motion</li>
                         <li className='py-2 text-sm'>react-typed</li>
-                        <li className='py-2 text-sm'>lottie-react</li>
                         <li className='py-2 text-sm'>react-router-dom</li>
                     </ul>
                 </div>

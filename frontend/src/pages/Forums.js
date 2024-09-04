@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar";
 import Preview from "../components/Preview";
 import Footer from "../components/Footer";
 import LoginModal from '../components/LoginModal';
+import ForumHeader from '../components/ForumHeader';
 
 function Home({ userData, openLoginModal, isLoginModalOpen, closeLoginModal, displayType, setDisplayType }) {
     return (
@@ -11,6 +12,7 @@ function Home({ userData, openLoginModal, isLoginModalOpen, closeLoginModal, dis
                 userData={userData}
                 openLoginModal={openLoginModal}
             />
+            <ForumHeader userData={userData} />
             <Preview>userData={userData}</Preview>
             <Footer userData={userData} />
             <LoginModal
@@ -19,7 +21,7 @@ function Home({ userData, openLoginModal, isLoginModalOpen, closeLoginModal, dis
                 displayType={displayType}
                 setDisplayType={setDisplayType}
             />
-        </div>
+        </div >
     );
 }
 

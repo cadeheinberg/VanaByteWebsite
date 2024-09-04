@@ -1,22 +1,55 @@
 import React from 'react';
+import { AiFillLike, AiFillDislike } from "react-icons/ai";
 
 function Thumbnail(props) {
     return (
-        <div className='bg-white rounded-lg p-3 shadow-lg'>
+        <div className='text-slate-600 flex flex-col bg-white rounded-lg p-5 shadow-md border-slate-200 border-l-[5px]'>
             <div className='flex'>
-                <div className='w-[35%] flex justify-center items-center'>
-                    <img className='w-full p-3'
-                        src={props.profile_pic}
-                        alt="Author"
-                    />
+                <div className='flex bg-slate-50'>
+                    <div className='w-[100px] p-3'>
+                        <img className='w-full'
+                            src={props.profile_pic}
+                            alt="Author"
+                        />
+                    </div>
+                    <div className='flex items-center p-3'>
+                        <div>
+                            <h2 className='text-nowrap'>{props.author}</h2>
+                            <p className='text-nowrap'>Noob</p>
+                            <p className='text-nowrap'>{props.date}</p>
+                        </div>
+                    </div>
                 </div>
-                <div className='p-4 text-right w-full'>
-                    <h1 className='font-bold'>{props.title}</h1>
-                    <h2>{props.author}</h2>
-                    <p>{props.date}</p>
+                <div className='flex items-center pl-6 p-2  w-full'>
+                    <h1 className='font-bold text-4xl'>{props.title}</h1>
                 </div>
             </div>
-            <p>{props.description}</p>
+            <div className='border-b-[1px]'>
+                <p className='p-2 py-3 text-lg'>{props.description}</p>
+            </div>
+            <div className=''>
+                <div className='flex gap-x-6 p-4 pb-0'>
+                    <div className='flex gap-x-2'>
+                        <span className='font-medium text-lg'>100</span>
+                        <span>
+                            <AiFillLike
+                                className='text-blue-500 h-6 w-6 sm:h-6 sm:w-6 md:h-6 md:w-6'
+                            />
+                        </span>
+                    </div>
+                    <div className='flex gap-x-2'>
+                        <span className='font-medium text-lg'>23</span>
+                        <span>
+                            <AiFillDislike
+                                className='text-red-500 h-6 w-6 sm:h-6 sm:w-6 md:h-6 md:w-6'
+                            />
+                        </span>
+                    </div>
+                    <div className='flex justify-end w-full'>
+                        <span className='font-medium text-lg rounded-xl underline underline-offset-2'>see the 8 comments</span>
+                    </div>
+                </div>
+            </div>
         </div>
     );
 }

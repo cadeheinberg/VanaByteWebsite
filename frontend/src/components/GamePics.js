@@ -7,10 +7,10 @@ import React from 'react'
 
 function GamePics() {
     return (
-        <div className='w-full pt-[7rem] pb-[10rem] px-4 bg-white'>
+        <div className='w-full pt-[7rem] pb-[10rem] px-4 bg-mywhite'>
             <div className='max-w-[1240px] mx-auto'>
                 <h1 className='text-myblack text-6xl font-bold text-center mb-10 pb-2 pt-2 mx-10'>KIT PVP</h1>
-                <div className='relative p-8 bg-white rounded-md '>
+                <div className='relative p-8 bg-mywhite rounded-md '>
                     {/* <button className='absolute left-2 bottom-[50%] bg-slate-800'>
                         <FaAngleUp className='rotate-[270deg]' color='white' size={40} />
                     </button>

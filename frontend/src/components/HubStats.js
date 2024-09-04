@@ -58,36 +58,38 @@ function HubStats({ userData }) {
     const sortedRows = sortRows(playerRows, sortConfig);
 
     return (
-        <div className="mx-auto w-full max-w-[1240px] text-white px-4 sm:px-6 lg:px-8">
-            <div className="shadow overflow-hidden border-b border-gray-800 sm:rounded-lg">
-                <table className="min-w-full divide-y divide-gray-700">
-                    <thead className="bg-gray-900">
-                        <tr>
-                            <th scope="col" className="px-3 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">#</th>
-                            <th scope="col" className="px-3 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider"><div className="flex"><div className="">Player</div><div className="w-full flex justify-end hover:cursor-pointer hover:text-mygreen" onClick={() => handleSort(rowNames[0])}>{isArrowUp(rowNames[0]) ? <FaCaretUp size={18} /> : <FaCaretDown size={18} />}</div></div></th>
-                            <th scope="col" className="px-3 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider"><div className="flex"><div className="">Cakes</div><div className="w-full flex justify-end hover:cursor-pointer hover:text-mygreen" onClick={() => handleSort(rowNames[1])}>{isArrowUp(rowNames[1]) ? <FaCaretUp size={18} /> : <FaCaretDown size={18} />}</div></div></th>
-                            <th scope="col" className="px-3 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider"><div className="flex"><div className="">Level</div><div className="w-full flex justify-end hover:cursor-pointer hover:text-mygreen" onClick={() => handleSort(rowNames[2])}>{isArrowUp(rowNames[2]) ? <FaCaretUp size={18} /> : <FaCaretDown size={18} />}</div></div></th>
-                            <th scope="col" className="px-3 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider"><div className="flex"><div className="">Exp</div><div className="w-full flex justify-end hover:cursor-pointer hover:text-mygreen" onClick={() => handleSort(rowNames[3])}>{isArrowUp(rowNames[3]) ? <FaCaretUp size={18} /> : <FaCaretDown size={18} />}</div></div></th>
-                            <th scope="col" className="px-3 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider"><div className="flex"><div className="">Kills</div><div className="w-full flex justify-end hover:cursor-pointer hover:text-mygreen" onClick={() => handleSort(rowNames[4])}>{isArrowUp(rowNames[4]) ? <FaCaretUp size={18} /> : <FaCaretDown size={18} />}</div></div></th>
-                            <th scope="col" className="px-3 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider"><div className="flex"><div className="">Deaths</div><div className="w-full flex justify-end hover:cursor-pointer hover:text-mygreen" onClick={() => handleSort(rowNames[5])}>{isArrowUp(rowNames[5]) ? <FaCaretUp size={18} /> : <FaCaretDown size={18} />}</div></div></th>
-                        </tr>
-                    </thead>
-                    <tbody className="bg-gray-800 divide-y divide-gray-700">
-                        {sortedRows.map((player, index) => (
-                            <tr key={player.UUID}>
-                                <td className="px-3 py-4 whitespace-nowrap text-sm font-medium text-gray-300">{index + 1}</td>
-                                <td className="px-3 py-4 whitespace-nowrap text-sm font-medium text-gray-300">{player.PlayerName}</td>
-                                <td className="px-3 py-4 whitespace-nowrap text-sm text-gray-300">{player.server_cakes}</td>
-                                <td className="px-3 py-4 whitespace-nowrap text-sm text-gray-300">{player.server_level}</td>
-                                <td className="px-3 py-4 whitespace-nowrap text-sm text-gray-300">{player.server_xp}</td>
-                                <td className="px-3 py-4 whitespace-nowrap text-sm text-gray-300">{player.kitpvp_kills}</td>
-                                <td className="px-3 py-4 whitespace-nowrap text-sm text-gray-300">{player.kitpvp_deaths}</td>
+        <div className="bg-mywhite">
+            <div className="py-8 px-4 sm:px-6 lg:px-8 mx-auto w-full max-w-[1240px] text-white">
+                <div className="shadow overflow-hidden border-b border-gray-800 sm:rounded-lg">
+                    <table className="min-w-full divide-y divide-gray-700">
+                        <thead className="bg-gray-900">
+                            <tr>
+                                <th scope="col" className="px-3 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">#</th>
+                                <th scope="col" className="px-3 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider"><div className="flex"><div className="">Player</div><div className="w-full flex justify-end hover:cursor-pointer hover:text-mygreen" onClick={() => handleSort(rowNames[0])}>{isArrowUp(rowNames[0]) ? <FaCaretUp size={18} /> : <FaCaretDown size={18} />}</div></div></th>
+                                <th scope="col" className="px-3 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider"><div className="flex"><div className="">Cakes</div><div className="w-full flex justify-end hover:cursor-pointer hover:text-mygreen" onClick={() => handleSort(rowNames[1])}>{isArrowUp(rowNames[1]) ? <FaCaretUp size={18} /> : <FaCaretDown size={18} />}</div></div></th>
+                                <th scope="col" className="px-3 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider"><div className="flex"><div className="">Level</div><div className="w-full flex justify-end hover:cursor-pointer hover:text-mygreen" onClick={() => handleSort(rowNames[2])}>{isArrowUp(rowNames[2]) ? <FaCaretUp size={18} /> : <FaCaretDown size={18} />}</div></div></th>
+                                <th scope="col" className="px-3 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider"><div className="flex"><div className="">Exp</div><div className="w-full flex justify-end hover:cursor-pointer hover:text-mygreen" onClick={() => handleSort(rowNames[3])}>{isArrowUp(rowNames[3]) ? <FaCaretUp size={18} /> : <FaCaretDown size={18} />}</div></div></th>
+                                <th scope="col" className="px-3 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider"><div className="flex"><div className="">Kills</div><div className="w-full flex justify-end hover:cursor-pointer hover:text-mygreen" onClick={() => handleSort(rowNames[4])}>{isArrowUp(rowNames[4]) ? <FaCaretUp size={18} /> : <FaCaretDown size={18} />}</div></div></th>
+                                <th scope="col" className="px-3 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider"><div className="flex"><div className="">Deaths</div><div className="w-full flex justify-end hover:cursor-pointer hover:text-mygreen" onClick={() => handleSort(rowNames[5])}>{isArrowUp(rowNames[5]) ? <FaCaretUp size={18} /> : <FaCaretDown size={18} />}</div></div></th>
                             </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </div>
-        </div >
+                        </thead>
+                        <tbody className="bg-gray-800 divide-y divide-gray-700">
+                            {sortedRows.map((player, index) => (
+                                <tr key={player.UUID}>
+                                    <td className="px-3 py-4 whitespace-nowrap text-sm font-medium text-gray-300">{index + 1}</td>
+                                    <td className="px-3 py-4 whitespace-nowrap text-sm font-medium text-gray-300">{player.PlayerName}</td>
+                                    <td className="px-3 py-4 whitespace-nowrap text-sm text-gray-300">{player.server_cakes}</td>
+                                    <td className="px-3 py-4 whitespace-nowrap text-sm text-gray-300">{player.server_level}</td>
+                                    <td className="px-3 py-4 whitespace-nowrap text-sm text-gray-300">{player.server_xp}</td>
+                                    <td className="px-3 py-4 whitespace-nowrap text-sm text-gray-300">{player.kitpvp_kills}</td>
+                                    <td className="px-3 py-4 whitespace-nowrap text-sm text-gray-300">{player.kitpvp_deaths}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+            </div >
+        </div>
     );
 }
 

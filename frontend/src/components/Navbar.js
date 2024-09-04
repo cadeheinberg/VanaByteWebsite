@@ -3,7 +3,7 @@ import profile1 from "../assets/defaults/user1_solid.png";
 import { AiOutlineClose } from 'react-icons/ai';
 import API_URL from '../config';
 import { Link } from 'react-router-dom'
-import { FaRegUser } from "react-icons/fa";
+// import { FaRegUser } from "react-icons/fa";
 import LOGIN_MODE from '../enums/enums';
 
 function Navbar({ userData, openLoginModal }) {
@@ -37,8 +37,11 @@ function Navbar({ userData, openLoginModal }) {
                             alt="profile"
                         />
                         :
-                        <div className='hover:cursor-pointer p-6 bg-white text-myblack rounded-full text-nowrap'>
-                            <FaRegUser size={40} color='#000000' />
+                        <div className='hover:cursor-pointer p-1 bg-white text-myblack rounded-full text-nowrap'>
+                            <img className='w-full max-w-[100px]'
+                                src={profile1}
+                                alt="profile"
+                            />
                         </div>
                     }
                 </button>
@@ -49,34 +52,38 @@ function Navbar({ userData, openLoginModal }) {
                 <li className='border-b border-gray-600'><Link className='inline-block w-full p-4 hover:cursor-pointer hover:underline' to="/stats">Stats</Link></li>
                 <li className='border-b border-gray-600'><Link className='inline-block w-full p-4 hover:cursor-pointer hover:underline' to="/forums">Forums</Link></li>
                 <li className='border-b border-gray-600'><Link className='inline-block w-full p-4 hover:cursor-pointer hover:underline' to="/store">Store</Link></li>
+                <li className='border-b border-gray-600'><Link className='inline-block w-full p-4 hover:cursor-pointer hover:underline' to="/store">Contact</Link></li>
                 {userData ? <li className='text-mygreen font-bold text-nowrap'><div className='p-4 hover:cursor-pointer hover:underline' onClick={handleLogout}>Log Out</div></li> : null}
             </ul>
         </div >
 
     return (
-        <div className='flex justify-center sm:justify-between items-center h-24 max-w-[1240px] mx-auto px-4 text-white '>
-            <h1 className='w-full text-3xl font-bold text-mygreen sm:inline'>{userData ? userData.userName : 'VanaByte'}</h1>
-            <ul className="flex font-medium items-center space-x-0 sm:space-x-2">
+        <div className='flex justify-between items-center h-28 max-w-[1240px] mx-auto px-4 text-white '>
+            <h1 className='text-3xl font-bold text-mygreen sm:inline'>{userData ? userData.userName : 'VanaByte'}</h1>
+            <ul className="flex font-medium items-center space-x-0 sm:space-x-6 text-2xl uppercase">
                 <li className='hidden sm:block'><Link className='p-3 hover:underline' to="/">Home</Link></li>
                 <li className='hidden sm:block'><Link className='p-3 hover:underline' to="/stats">Stats</Link></li>
                 <li className='hidden sm:block'><Link className='p-3 hover:underline' to="/forums">Forums</Link></li>
-                <li className='md:pr-10 hidden sm:block'><Link className='p-3 hover:underline' to="/store">Store</Link></li>
-                {userData ? <li className='pl-2'>
+                <li className='hidden sm:block'><Link className='p-3 hover:underline' to="/store">Store</Link></li>
+                <li className='hidden sm:block'><Link className='p-3 hover:underline' to="/store">Contact</Link></li>
+            </ul>
+            {userData ? <div className='hover:cursor-pointer'>
+                <button onClick={handleProfileClick}>
+                    <img className='w-max max-w-[60px]'
+                        src={profile1}
+                        alt="profile"
+                    />
+                </button>
+            </div> :
+                <div className='hover:cursor-pointer'>
                     <button onClick={handleProfileClick}>
                         <img className='w-max max-w-[60px]'
                             src={profile1}
                             alt="profile"
                         />
                     </button>
-                </li> :
-                    <li
-                        className='hover:cursor-pointer p-4 bg-white text-myblack rounded-full text-nowrap'
-                        onClick={handleProfileClick}
-                    >
-                        <FaRegUser size={30} color='#000000' />
-                    </li>
-                }
-            </ul>
+                </div>
+            }
             {sideBar}
         </div>
     );
