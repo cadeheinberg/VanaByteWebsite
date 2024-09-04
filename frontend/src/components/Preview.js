@@ -26,17 +26,17 @@ function Preview() {
 
     return (
         <div className='bg-mywhite w-full pb-8'>
-            <div className='max-w-[900px] mx-auto p-2 sm:px-4'>
-                <div className='grid grid-cols-1 gap-x-10 gap-y-10'>
+            <div className='max-w-[620px] mx-auto p-2 sm:px-4'>
+                <div className='grid grid-cols-1 gap-x-10 gap-y-3'>
                     {notes.map((note, index) => (
                         <Thumbnail
                             key={index}
                             noteid={note.noteid}
                             author={note.author}
                             profile_pic={note.profile_pic}
-                            title={note.title.length > 60 ? note.title.substring(0, 60) + "..." : note.title}
+                            title={note.title}
                             date={note.date}
-                            description={note.description ? note.description.substring(0, 380) + "..." : ""}
+                            description={note.description ? note.description.substring(0, 100) + "..." : ""}
                         />
                     ))}
                 </div>

@@ -26,10 +26,16 @@ function Navbar({ userData, openLoginModal }) {
 
     const sideBar =
         <div className={nav ? 'z-50 fixed right-0 top-0 w-[50%] sm:w-[50%] md:w-[45%] lg:w-[35%] h-full shadow-2xl border-r border-l-gray-900 bg-mygray ease-in-out duration-500' : 'fixed right-[-100%]'}>
-            <div onClick={handleProfileClick} className='pt-4 pl-4'>
-                <AiOutlineClose size={30} />
+            <div className='flex items-center'>
+                <div onClick={handleProfileClick} className='p-4 hover:cursor-pointer'>
+                    <AiOutlineClose size={30} />
+                </div>
+                <div className='w-full text-right p-4'>
+                    <p className='italic text-2xl'>{userData ? userData.userName : ''}</p>
+                </div>
             </div>
-            <div className='flex justify-center py-4 md:pt-4'>
+
+            <div className='flex justify-center pb-0 pt-0'>
                 <button onClick={handleProfileClick}>
                     {userData ?
                         <img className='w-max max-w-[90px] sm:max-w-[140px]'
@@ -37,16 +43,14 @@ function Navbar({ userData, openLoginModal }) {
                             alt="profile"
                         />
                         :
-                        <div className='hover:cursor-pointer p-1 bg-white text-myblack rounded-full text-nowrap'>
-                            <img className='w-full max-w-[100px]'
-                                src={profile1}
-                                alt="profile"
-                            />
-                        </div>
+                        <img className='w-max max-w-[90px] sm:max-w-[140px]'
+                            src={profile1}
+                            alt="profile"
+                        />
                     }
                 </button>
             </div>
-            <ul className='p-0 sm:p-4 uppercase'>
+            <ul className='p-0 uppercase'>
                 {!userData ? <li className='border-b border-gray-600 text-mygreen font-bold'><div className='p-4 hover:cursor-pointer hover:underline' onClick={() => { openLoginModal(LOGIN_MODE.login) }}>Log In</div></li> : null}
                 <li className='border-b border-gray-600'><Link className='inline-block w-full p-4 hover:cursor-pointer hover:underline' to="/">Home</Link></li>
                 <li className='border-b border-gray-600'><Link className='inline-block w-full p-4 hover:cursor-pointer hover:underline' to="/stats">Stats</Link></li>
@@ -58,30 +62,30 @@ function Navbar({ userData, openLoginModal }) {
         </div >
 
     return (
-        <div className='grid grid-cols-7 justify-center items-center h-20 md:h-20 max-w-[1000px] mx-auto px-4 text-white '>
+        <div className='grid grid-cols-7 justify-center items-center h-20 max-w-[1000px] mx-auto px-4 text-white '>
             <div className='col-span-1'>
-                <h1 className='text-2xl md:text-3xl font-bold text-mygreen'>VanaByte</h1>
+                <Link className='text-xl md:text-3xl font-bold text-mygreen' to="/"><h1>Vana</h1></Link>
             </div>
-            <div className='col-span-5'>
-                <ul className="mx-auto w-fit max-w-fit flex font-medium items-center space-x-0 sm:space-x-1 md:space-x-6 text-md md:text-2xl uppercase">
-                    <li className='hidden sm:block'><Link className='p-3 hover:underline' to="/">Home</Link></li>
-                    <li className='hidden sm:block'><Link className='p-3 hover:underline' to="/stats">Stats</Link></li>
-                    <li className='hidden sm:block'><Link className='p-3 hover:underline' to="/forums">Forums</Link></li>
-                    <li className='hidden sm:block'><Link className='p-3 hover:underline' to="/store">Store</Link></li>
-                    <li className='hidden sm:block'><Link className='p-3 hover:underline' to="/contact">Contact</Link></li>
+            <div className='col-span-5 h-full flex items-center'>
+                <ul className="mx-auto w-fit max-w-fit flex font-medium text-sm md:text-lg uppercase">
+                    <li className='hidden xs:block border-x-[2px] border-slate-300 py-1 sm:py-2'><Link className='p-2 sm:p-3 hover:underline' to="/">Home</Link></li>
+                    <li className='hidden xs:block border-r-[2px] border-slate-300 py-1 sm:py-2'><Link className='p-2 sm:p-3 hover:underline' to="/stats">Stats</Link></li>
+                    <li className='hidden xs:block border-r-[2px] border-slate-300 py-1 sm:py-2'><Link className='p-2 sm:p-3 hover:underline' to="/forums">Forums</Link></li>
+                    <li className='hidden xs:block border-r-[2px] border-slate-300 py-1 sm:py-2'><Link className='p-2 sm:p-3 hover:underline' to="/store">Store</Link></li>
+                    <li className='hidden xs:block border-r-[2px] border-slate-300 py-1 sm:py-2'><Link className='p-2 sm:p-3 hover:underline' to="/contact">Contact</Link></li>
                 </ul>
             </div>
             <div className='col-span-1 hover:cursor-pointer flex justify-end items-center'>
                 {userData ?
                     <button onClick={handleProfileClick}>
-                        <img className='w-max max-w-[60px]'
+                        <img className='w-max max-w-[45px]'
                             src={profile1}
                             alt="profile"
                         />
                     </button>
                     :
                     <button onClick={handleProfileClick}>
-                        <img className='w-max max-w-[60px]'
+                        <img className='w-max max-w-[45px]'
                             src={profile1}
                             alt="profile"
                         />
