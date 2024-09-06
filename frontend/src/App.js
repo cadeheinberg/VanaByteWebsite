@@ -42,7 +42,7 @@ function App() {
           const resData = await res.json();
           console.log("jwt token found in browser")
           console.log(resData);
-          setUserData(new UserData(true, resData.user_id, resData.username, resData.profileImg));
+          setUserData(new UserData(true, resData.web_uuid, resData.username, resData.profileImg));
         }
       } else {
         setUserData(null);

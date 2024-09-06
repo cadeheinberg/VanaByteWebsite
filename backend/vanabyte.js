@@ -37,24 +37,26 @@ const pool = mysql.createPool(dbConfig, (err, response) => {
 
 const db = pool.promise();
 
-async function createTables() {
+async function createUserDataTable() {
     try {
         await db.query(`
-            CREATE TABLE IF NOT EXISTS ${process.env.DB_TABLE_USER_DATA} (
-                user_id VARCHAR(255) NOT NULL PRIMARY KEY,
+            CREATE TABLE IF NOT EXISTS ${process.env.DB_TABLE_WEB_DATA} (
+                web_uuid VARCHAR(255) NOT NULL PRIMARY KEY,
+                mc_uuid VARCHAR(255) NULL,
                 name VARCHAR(255) NOT NULL,
                 email VARCHAR(255) NOT NULL UNIQUE,
                 password VARCHAR(255) NOT NULL,
-                profile VARCHAR(255) NOT NULL
+                profile VARCHAR(255) NULL,
+                role VARCHAR(15) DEFAULT 'user'
             );
         `);
-        console.log(process.env.DB_TABLE_USER_DATA + " table is ready");
+        console.log(process.env.DB_TABLE_WEB_DATA + " table is ready");
     } catch (err) {
-        console.error("Error creating" + process.env.DB_TABLE_USER_DATA + "table:", err.message);
+        console.error("Error creating" + process.env.DB_TABLE_WEB_DATA + "table:", err.message);
     }
 }
 
-createTables();
+createUserDataTable();
 
 //////
 ////// ROUTING
@@ -69,7 +71,7 @@ const verifyUser = (req, res, next) => {
             if (err) {
                 return res.status(400).json({ message: err.message });
             } else {
-                req.user_id = decoded.user_id;
+                req.web_uuid = decoded.web_uuid;
                 req.username = decoded.username;
                 next();
             }
@@ -80,7 +82,7 @@ const verifyUser = (req, res, next) => {
 app.get("/", verifyUser, async (req, res) => {
     return res.status(201).json({
         message: 'Login successful',
-        user_id: req.user_id,
+        web_uuid: req.web_uuid,
         username: req.username
     });
 });
@@ -90,17 +92,17 @@ app.post("/login", async (req, res) => {
     console.log(req.body);
     const { email, password } = req.body;
     try {
-        const [rows] = await db.query(`SELECT * FROM ${process.env.DB_TABLE_USER_DATA} WHERE email = ?`, [email]);
+        const [rows] = await db.query(`SELECT * FROM ${process.env.DB_TABLE_WEB_DATA} WHERE email = ?`, [email]);
         if (rows.length === 0) {
             res.status(401).json({ message: 'Invalid credentials' });
         }
         const hashWord = rows[0].password;
         const isMatch = await bcrypt.compare(password, hashWord);
         if (isMatch) {
-            const user_id = rows[0].user_id;
+            const web_uuid = rows[0].web_uuid;
             const username = rows[0].name;
             console.log(username + " logged in successfully");
-            const token = jwt.sign({ user_id, username }, process.env.JWT_SECRET, { expiresIn: '1d' });
+            const token = jwt.sign({ web_uuid, username }, process.env.JWT_SECRET, { expiresIn: '1d' });
             res.cookie(process.env.JWT_COOKIE_NAME, token, {
                 httpOnly: true, // Makes sure the cookie can't be accessed through JavaScript
                 secure: process.env.NODE_ENV === 'production', // Use 'secure' flag only in production
@@ -126,7 +128,7 @@ app.post("/register", async (req, res) => {
         //hash the password
         const hashWord = await bcrypt.hash(password.toString(), salt);
         const newUserId = uuidv4();
-        const [result] = await db.query(`INSERT INTO ${process.env.DB_TABLE_USER_DATA} (user_id, name, email, password, profile) VALUES (?, ?, ?, ?, ?)`, [newUserId.toString(), username, email, hashWord, 'none']);
+        const [result] = await db.query(`INSERT INTO ${process.env.DB_TABLE_WEB_DATA} (web_uuid, name, email, password) VALUES (?, ?, ?, ?)`, [newUserId.toString(), username, email, hashWord]);
         return res.status(201).json({ message: 'Registration successful' });
     } catch (err) {
         console.log(err)

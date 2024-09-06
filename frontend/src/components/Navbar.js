@@ -62,9 +62,9 @@ function Navbar({ userData, openLoginModal }) {
         </div >
 
     return (
-        <div className='grid grid-cols-7 justify-center items-center h-20 max-w-[1000px] mx-auto px-4 text-white '>
+        <div className='grid grid-cols-7 justify-center items-center h-20 max-w-[1000px] mx-auto px-4 text-white'>
             <div className='col-span-1'>
-                <Link className='text-xl md:text-3xl font-bold text-mygreen' to="/"><h1>Vana</h1></Link>
+                <Link className='text-xl md:text-3xl font-bold text-mygreen' to="/"><h1>VanaByte</h1></Link>
             </div>
             <div className='col-span-5 h-full flex items-center'>
                 <ul className="mx-auto w-fit max-w-fit flex font-medium text-sm md:text-lg uppercase">
