@@ -11,22 +11,24 @@ function LoginModal({ isLoginModalOpen, closeLoginModal, displayType, setDisplay
     })
     const [loginError, setLoginError] = useState(null);
 
+    const performLogin = async () => {
+        const res = await fetch(`${API_URL}login`, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(credentials),
+            credentials: 'include'
+        });
+        return res;
+    }
+
     const handleLogin = async (event) => {
         event.preventDefault();
         try {
-            const res = await fetch(`${API_URL}login`, {
-                method: "POST",
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(credentials),
-                credentials: 'include'
-            });
-            console.log(res);
+            const res = await performLogin();
             const resData = await res.json();
-            console.log(resData)
             if (res.ok) {
-                console.log('reloading')
                 window.location.reload(true);
             } else {
                 console.log(resData.message)
@@ -40,8 +42,16 @@ function LoginModal({ isLoginModalOpen, closeLoginModal, displayType, setDisplay
 
     const handleRegister = async (event) => {
         event.preventDefault();
+        if (credentials.username.length < 3) {
+            setLoginError('Username must be at least 3 characters long');
+            return;
+        }
+        if (credentials.password.length < 8) {
+            setLoginError('Password must be at least 8 characters long');
+            return;
+        }
         try {
-            const res = await fetch(`${API_URL}register`, {
+            const registerRes = await fetch(`${API_URL}register`, {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json'
@@ -49,15 +59,17 @@ function LoginModal({ isLoginModalOpen, closeLoginModal, displayType, setDisplay
                 body: JSON.stringify(credentials),
                 credentials: 'include'
             });
-            console.log(res);
-            const resData = await res.json();
-            console.log(resData)
-            if (res.ok) {
-                console.log('reloading')
-                window.location.reload(true);
+            const registerResData = await registerRes.json();
+            if (registerRes.ok) {
+                const loginRes = await performLogin();
+                const loginResData = await loginRes.json();
+                if (loginRes.ok) {
+                    window.location.reload(true);
+                } else {
+                    setLoginError(loginResData.message)
+                }
             } else {
-                console.log(resData.message)
-                setLoginError(resData.message)
+                setLoginError(registerResData.message)
             }
         } catch (err) {
             console.error(err.message);
@@ -83,7 +95,7 @@ function LoginModal({ isLoginModalOpen, closeLoginModal, displayType, setDisplay
                                 htmlFor="username">Username:
                             </label>
                             <input className="shadow border rounded w-full py-2 px-3 text-gray-700 focus:border-mygreen focus:shadow-2xl focus:border-2 focus:outline-none"
-                                name="email" type="text" placeholder="Enter Email" onChange={e => setCredentials({ ...credentials, username: e.target.value })}>
+                                name="username" type="text" placeholder="Enter Username" onChange={e => setCredentials({ ...credentials, username: e.target.value })}>
                             </input>
                         </div>
                         :

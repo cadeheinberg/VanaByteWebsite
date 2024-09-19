@@ -3,37 +3,39 @@ import API_URL from '../config';
 import { FaCaretUp, FaCaretDown } from "react-icons/fa";
 
 function HubStats({ userData }) {
-
     const [playerRows, setPlayerRows] = useState([]);
     const [sortConfig, setSortConfig] = useState({
         key: 'server_cakes',
         direction: 'desc'
     });
 
+    const columns = [
+        { key: 'playerName', label: 'Player' },
+        { key: 'server_cakes', label: 'Cakes' },
+        { key: 'server_level', label: 'Level' },
+        { key: 'server_xp', label: 'Exp' },
+        { key: 'kitpvp_kills', label: 'Kills' },
+        { key: 'kitpvp_deaths', label: 'Deaths' },
+    ];
+
     const getStats = async () => {
         try {
             const response = await fetch(`${API_URL}stats`);
-            const jsonData = await response.json();
-            setPlayerRows(jsonData);
+            const arrayOfJsons = await response.json();
+            setPlayerRows(arrayOfJsons);
         } catch (err) {
             console.error(err.message);
         }
     };
 
-    const isArrowUp = (colToSortBy) => {
-        return sortConfig.key === colToSortBy && sortConfig.direction === 'asc';
-    }
+    const isArrowUp = (colToSortBy) => sortConfig.key === colToSortBy && sortConfig.direction === 'asc';
 
     const sortRows = (rows, config) => {
         let sortedRows = [...rows];
-        if (config.key !== null) {
+        if (config.key) {
             sortedRows.sort((a, b) => {
-                if (a[config.key] < b[config.key]) {
-                    return config.direction === 'asc' ? -1 : 1;
-                }
-                if (a[config.key] > b[config.key]) {
-                    return config.direction === 'asc' ? 1 : -1;
-                }
+                if (a[config.key] < b[config.key]) return config.direction === 'asc' ? -1 : 1;
+                if (a[config.key] > b[config.key]) return config.direction === 'asc' ? 1 : -1;
                 return 0;
             });
         }
@@ -41,19 +43,13 @@ function HubStats({ userData }) {
     };
 
     const handleSort = (key) => {
-        let direction = 'asc';
-        if (isArrowUp(key)) {
-            //reverse direction of sorting every click
-            direction = 'desc';
-        }
+        const direction = isArrowUp(key) ? 'desc' : 'asc';
         setSortConfig({ key, direction });
     };
 
     useEffect(() => {
         getStats();
     }, []);
-
-    const rowNames = ['PlayerName', 'server_cakes', 'server_level', 'server_xp', 'kitpvp_kills', 'kitpvp_deaths']
 
     const sortedRows = sortRows(playerRows, sortConfig);
 
@@ -65,30 +61,31 @@ function HubStats({ userData }) {
                         <thead className="bg-gray-900">
                             <tr>
                                 <th scope="col" className="px-3 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">#</th>
-                                <th scope="col" className="px-3 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider"><div className="flex"><div className="">Player</div><div className="w-full flex justify-end hover:cursor-pointer hover:text-mygreen" onClick={() => handleSort(rowNames[0])}>{isArrowUp(rowNames[0]) ? <FaCaretUp size={18} /> : <FaCaretDown size={18} />}</div></div></th>
-                                <th scope="col" className="px-3 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider"><div className="flex"><div className="">Cakes</div><div className="w-full flex justify-end hover:cursor-pointer hover:text-mygreen" onClick={() => handleSort(rowNames[1])}>{isArrowUp(rowNames[1]) ? <FaCaretUp size={18} /> : <FaCaretDown size={18} />}</div></div></th>
-                                <th scope="col" className="px-3 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider"><div className="flex"><div className="">Level</div><div className="w-full flex justify-end hover:cursor-pointer hover:text-mygreen" onClick={() => handleSort(rowNames[2])}>{isArrowUp(rowNames[2]) ? <FaCaretUp size={18} /> : <FaCaretDown size={18} />}</div></div></th>
-                                <th scope="col" className="px-3 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider"><div className="flex"><div className="">Exp</div><div className="w-full flex justify-end hover:cursor-pointer hover:text-mygreen" onClick={() => handleSort(rowNames[3])}>{isArrowUp(rowNames[3]) ? <FaCaretUp size={18} /> : <FaCaretDown size={18} />}</div></div></th>
-                                <th scope="col" className="px-3 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider"><div className="flex"><div className="">Kills</div><div className="w-full flex justify-end hover:cursor-pointer hover:text-mygreen" onClick={() => handleSort(rowNames[4])}>{isArrowUp(rowNames[4]) ? <FaCaretUp size={18} /> : <FaCaretDown size={18} />}</div></div></th>
-                                <th scope="col" className="px-3 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider"><div className="flex"><div className="">Deaths</div><div className="w-full flex justify-end hover:cursor-pointer hover:text-mygreen" onClick={() => handleSort(rowNames[5])}>{isArrowUp(rowNames[5]) ? <FaCaretUp size={18} /> : <FaCaretDown size={18} />}</div></div></th>
+                                {columns.map((column) => (
+                                    <th key={column.key} scope="col" className="px-3 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">
+                                        <div className="flex">
+                                            <div>{column.label}</div>
+                                            <div className="w-full flex justify-end hover:cursor-pointer hover:text-mygreen" onClick={() => handleSort(column.key)}>
+                                                {isArrowUp(column.key) ? <FaCaretUp size={18} /> : <FaCaretDown size={18} />}
+                                            </div>
+                                        </div>
+                                    </th>
+                                ))}
                             </tr>
                         </thead>
                         <tbody className="bg-gray-800 divide-y divide-gray-700">
                             {sortedRows.map((player, index) => (
-                                <tr key={player.UUID}>
+                                <tr key={player.mc_uuid}>
                                     <td className="px-3 py-4 whitespace-nowrap text-sm font-medium text-gray-300">{index + 1}</td>
-                                    <td className="px-3 py-4 whitespace-nowrap text-sm font-medium text-gray-300">{player.PlayerName}</td>
-                                    <td className="px-3 py-4 whitespace-nowrap text-sm text-gray-300">{player.server_cakes}</td>
-                                    <td className="px-3 py-4 whitespace-nowrap text-sm text-gray-300">{player.server_level}</td>
-                                    <td className="px-3 py-4 whitespace-nowrap text-sm text-gray-300">{player.server_xp}</td>
-                                    <td className="px-3 py-4 whitespace-nowrap text-sm text-gray-300">{player.kitpvp_kills}</td>
-                                    <td className="px-3 py-4 whitespace-nowrap text-sm text-gray-300">{player.kitpvp_deaths}</td>
+                                    {columns.map(column => (
+                                        <td key={column.key} className="px-3 py-4 whitespace-nowrap text-sm text-gray-300">{player[column.key]}</td>
+                                    ))}
                                 </tr>
                             ))}
                         </tbody>
                     </table>
                 </div>
-            </div >
+            </div>
         </div>
     );
 }
