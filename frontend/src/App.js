@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import LOGIN_MODE from './enums/enums';
+import LOGIN_MODE from './enums/login_mode';
 import API_URL from './config';
 import Home from './pages/Home';
 import MinecraftStats from "./pages/MinecraftStats";

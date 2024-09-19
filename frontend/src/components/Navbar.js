@@ -4,7 +4,7 @@ import { AiOutlineClose } from 'react-icons/ai';
 import API_URL from '../config';
 import { Link } from 'react-router-dom'
 // import { FaRegUser } from "react-icons/fa";
-import LOGIN_MODE from '../enums/enums';
+import LOGIN_MODE from '../enums/login_mode';
 
 function Navbar({ userData, openLoginModal }) {
     const [nav, setNav] = useState(false);
@@ -68,11 +68,11 @@ function Navbar({ userData, openLoginModal }) {
             </div>
             <div className='col-span-5 h-full flex items-center'>
                 <ul className="mx-auto w-fit max-w-fit flex font-medium text-sm md:text-lg uppercase">
-                    <li className='hidden xs:block border-x-[2px] border-slate-300 py-1 sm:py-2'><Link className='p-2 sm:p-3 hover:underline' to="/">Home</Link></li>
-                    <li className='hidden xs:block border-r-[2px] border-slate-300 py-1 sm:py-2'><Link className='p-2 sm:p-3 hover:underline' to="/stats">Stats</Link></li>
-                    <li className='hidden xs:block border-r-[2px] border-slate-300 py-1 sm:py-2'><Link className='p-2 sm:p-3 hover:underline' to="/forums">Forums</Link></li>
-                    <li className='hidden xs:block border-r-[2px] border-slate-300 py-1 sm:py-2'><Link className='p-2 sm:p-3 hover:underline' to="/store">Store</Link></li>
-                    <li className='hidden xs:block border-r-[2px] border-slate-300 py-1 sm:py-2'><Link className='p-2 sm:p-3 hover:underline' to="/contact">Contact</Link></li>
+                    <li className='hidden xs:block py-1 sm:py-2'><Link className='p-2 sm:p-3 hover:underline' to="/">Home</Link></li>
+                    <li className='hidden xs:block py-1 sm:py-2'><Link className='p-2 sm:p-3 hover:underline' to="/stats">Stats</Link></li>
+                    <li className='hidden xs:block py-1 sm:py-2'><Link className='p-2 sm:p-3 hover:underline' to="/forums">Forums</Link></li>
+                    <li className='hidden xs:block py-1 sm:py-2'><Link className='p-2 sm:p-3 hover:underline' to="/store">Store</Link></li>
+                    <li className='hidden xs:block py-1 sm:py-2'><Link className='p-2 sm:p-3 hover:underline' to="/contact">Contact</Link></li>
                 </ul>
             </div>
             <div className='col-span-1 hover:cursor-pointer flex justify-end items-center'>

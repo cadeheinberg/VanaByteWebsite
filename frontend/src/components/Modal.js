@@ -25,7 +25,7 @@ function Modal({ isOpen, closeModal, children }) {
 
     return (
         <div className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-50">
-            <div ref={modalRef} className="w-max max-w-[85%] sm:max-w-[50%] bg-white p-6 rounded-lg shadow-lg relative max-h-[90vh] overflow-y-auto">
+            <div ref={modalRef} className="w-max max-w-[85%] xs:w-[70%] xs:max-w-[400px] bg-white p-6 rounded-lg shadow-lg relative max-h-[90vh] overflow-y-auto">
                 <button
                     className="absolute top-2 right-2 text-2xl font-bold text-black"
                     onClick={closeModal}>

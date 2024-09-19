@@ -1,6 +1,6 @@
 import React, { useState, Fragment } from 'react';
 import Modal from './Modal'
-import LOGIN_MODE from '../enums/enums';
+import LOGIN_MODE from '../enums/login_mode';
 import API_URL from '../config';
 
 function LoginModal({ isLoginModalOpen, closeLoginModal, displayType, setDisplayType }) {
