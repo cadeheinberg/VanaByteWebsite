@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import profile1 from "../assets/defaults/user1_solid.png";
+import logo from "../assets/logos/android-chrome-512x512.png"
 import { AiOutlineClose } from 'react-icons/ai';
 import API_URL from '../config';
 import { Link } from 'react-router-dom'
@@ -66,11 +67,11 @@ function Navbar({ userData, openLoginModal }) {
 
     return (
         <div className='grid grid-cols-7 justify-center items-center h-20 xs:h-28 max-w-[1000px] mx-auto text-myblack'>
-            <div className='px-2 hidden md:inline-block col-span-1'>
-                <Link className='text-xl xs:text-2xl font-bold text-mygreen text-nowrap' to="/"><h1>VanaByte</h1></Link>
+            <div className='px-2 hidden md:flex justify-center col-span-1'>
+                <Link className='' to="/"><img className='w-[60px]' src={logo} alt="logo"></img></Link>
             </div>
             <div className='px-2 md:px-10 text-mywhite col-span-6 md:col-span-5 h-full flex items-center'>
-                <ul className="flex items-center mx-auto w-full font-bold text-sm xs:text-lg justify-between uppercase">
+                <ul className="flex items-center mx-auto w-full font-bold text-xs xs:text-lg justify-between uppercase">
                     <li className=''>
                         <Link className='hover:underline flex flex-col items-center' to="/">
                             <FaHome className='w-5 h-5 xs:w-8 xs:h-8'></FaHome>
@@ -103,17 +104,17 @@ function Navbar({ userData, openLoginModal }) {
                     </li>
                 </ul>
             </div>
-            <div className='col-span-1 hover:cursor-pointer flex justify-end items-center'>
+            <div className='col-span-1 hover:cursor-pointer flex justify-center items-center'>
                 {userData ?
                     <button onClick={handleProfileClick}>
-                        <img className='w-max max-w-[35px]'
+                        <img className='w-max max-w-[40px] xs:max-w-[55px]'
                             src={profile1}
                             alt="profile"
                         />
                     </button>
                     :
                     <button onClick={handleProfileClick}>
-                        <img className='w-max max-w-[35px]'
+                        <img className='w-max max-w-[40px] xs:max-w-[55px]'
                             src={profile1}
                             alt="profile"
                         />
