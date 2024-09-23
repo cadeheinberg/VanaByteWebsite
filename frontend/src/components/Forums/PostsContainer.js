@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Thumbnail from './Thumbnail';
 import API_URL from '../../config';
-import profile1 from "../../assets/defaults/user1_solid.png";
 
-function Preview() {
+function PostsContainer() {
     const [forumPosts, setForumPosts] = useState([]);
 
     const getPosts = async () => {
@@ -27,12 +26,7 @@ function Preview() {
                     {forumPosts.map((forumPost, index) => (
                         <Thumbnail
                             key={index}
-                            noteid={forumPost.post_id}
-                            author={forumPost.username}
-                            profile_pic={profile1}
-                            title={forumPost.title}
-                            date={forumPost.date}
-                            description={forumPost.description.substring(0, 100) + "..."}
+                            forumPost={forumPost}
                         />
                     ))}
                 </div>
@@ -41,4 +35,4 @@ function Preview() {
     );
 }
 
-export default Preview;
+export default PostsContainer;

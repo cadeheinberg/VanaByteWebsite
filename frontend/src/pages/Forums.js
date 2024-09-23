@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Navbar from "../components/Navbar";
-import Preview from "../components/Forums/Preview";
+import PostsContainer from "../components/Forums/PostsContainer";
 import Footer from '../components/Footer';
 import LoginModal from '../components/LoginModal';
 import ForumHeader from '../components/Forums/ForumHeader';
@@ -29,7 +29,7 @@ function Forums({ userData, openLoginModal, isLoginModalOpen, closeLoginModal, d
                 openPostEditor={openPostEditor}
                 setPostEditorMode={setPostEditorMode}
             />
-            <Preview>userData={userData}</Preview>
+            <PostsContainer>userData={userData}</PostsContainer>
             <Footer userData={userData} />
             <LoginModal
                 isLoginModalOpen={isLoginModalOpen}

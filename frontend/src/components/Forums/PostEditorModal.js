@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Modal from '../Modal'
 import API_URL from '../../config';
 import EDITOR_MODE from '../../enums/editor_mode';
+import categories from './Categories';
 
 const initialPostDetails = {
     title: '',
@@ -40,12 +41,6 @@ function PostEditorModal({ isPostEditorOpen, closePostEditor, postEditorMode }) 
             setPostError(err.message)
         }
     }
-
-    const categories = [
-        { key: 'category0001', label: 'Friends' },
-        { key: 'category0002', label: 'Idea' },
-        { key: 'category0003', label: 'Help' },
-    ];
 
     return (
         <Modal isOpen={isPostEditorOpen} closeModal={() => { closePostEditor(); setPostDetails(initialPostDetails); setPostError(null); }}>

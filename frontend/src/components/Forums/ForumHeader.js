@@ -15,7 +15,7 @@ function ForumHeader({ userData, openLoginModal, openPostEditor, setPostEditorMo
 
     return (
         <div className='bg-mywhite pb-1 pt-10'>
-            <div className='flex rounded-xl bg-mywhite w-full max-w-[600px] px-2 xs:px-4 mx-auto text-md font-medium sm:text-lg xs:font-bold'>
+            <div className='flex rounded-xl w-full max-w-[600px] px-2 xs:px-4 mx-auto text-md font-medium sm:text-lg xs:font-bold'>
                 <div className='flex text-gray-800 justify-center gap-x-[7px] sm:gap-x-2'>
                     <button className='bg-slate-300 rounded-xl h-fit hover:scale-110 duration-300 p-2 xs:p-2'>
                         <h1 className=''>All</h1>

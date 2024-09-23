@@ -3,7 +3,10 @@ import profile1 from "../assets/defaults/user1_solid.png";
 import { AiOutlineClose } from 'react-icons/ai';
 import API_URL from '../config';
 import { Link } from 'react-router-dom'
-// import { FaRegUser } from "react-icons/fa";
+import { FaHome, FaStore } from "react-icons/fa";
+import { IoIosStats } from "react-icons/io";
+import { MdForum } from "react-icons/md";
+import { CiMail } from "react-icons/ci";
 import LOGIN_MODE from '../enums/login_mode';
 
 function Navbar({ userData, openLoginModal }) {
@@ -62,17 +65,42 @@ function Navbar({ userData, openLoginModal }) {
         </div >
 
     return (
-        <div className='grid grid-cols-7 justify-center items-center h-20 max-w-[1000px] mx-auto px-4 text-myblack'>
-            <div className='col-span-1'>
-                <Link className='text-xl xs:text-2xl font-bold text-mygreen' to="/"><h1>VanaByte</h1></Link>
+        <div className='grid grid-cols-7 justify-center items-center h-20 xs:h-28 max-w-[1000px] mx-auto text-myblack'>
+            <div className='px-2 hidden md:inline-block col-span-1'>
+                <Link className='text-xl xs:text-2xl font-bold text-mygreen text-nowrap' to="/"><h1>VanaByte</h1></Link>
             </div>
-            <div className='col-span-5 h-full flex items-center'>
-                <ul className="hidden md:flex mx-auto w-fit max-w-fit font-bold text-sm md:text-lg uppercase space-x-3 text-mygray">
-                    <li className='hidden xs:block py-2 sm:py-2 bg-gray-100 shadow-md rounded-md'><Link className='p-2 sm:p-3 hover:underline' to="/">Home</Link></li>
-                    <li className='hidden xs:block py-2 sm:py-2 bg-gray-100 shadow-md rounded-md'><Link className='p-2 sm:p-3 hover:underline' to="/stats">Stats</Link></li>
-                    <li className='hidden xs:block py-2 sm:py-2 bg-gray-100 shadow-md rounded-md'><Link className='p-2 sm:p-3 hover:underline' to="/forums">Forums</Link></li>
-                    <li className='hidden xs:block py-2 sm:py-2 bg-gray-100 shadow-md rounded-md'><Link className='p-2 sm:p-3 hover:underline' to="/store">Store</Link></li>
-                    <li className='hidden xs:block py-2 sm:py-2 bg-gray-100 shadow-md rounded-md'><Link className='p-2 sm:p-3 hover:underline' to="/contact">Contact</Link></li>
+            <div className='px-2 md:px-10 text-mywhite col-span-6 md:col-span-5 h-full flex items-center'>
+                <ul className="flex items-center mx-auto w-full font-bold text-sm xs:text-lg justify-between uppercase">
+                    <li className=''>
+                        <Link className='hover:underline flex flex-col items-center' to="/">
+                            <FaHome className='w-5 h-5 xs:w-8 xs:h-8'></FaHome>
+                            <h1>Home</h1>
+                        </Link>
+                    </li>
+                    <li className=''>
+                        <Link className='hover:underline flex flex-col items-center' to="/stats">
+                            <IoIosStats className='w-5 h-5 xs:w-8 xs:h-8'></IoIosStats>
+                            <h1>Stats</h1>
+                        </Link>
+                    </li>
+                    <li className=''>
+                        <Link className='hover:underline flex flex-col items-center' to="/forums">
+                            <MdForum className='w-5 h-5 xs:w-8 xs:h-8'></MdForum>
+                            <h1>Forums</h1>
+                        </Link>
+                    </li>
+                    <li className=''>
+                        <Link className='hover:underline flex flex-col items-center' to="/store">
+                            <FaStore className='w-5 h-5 xs:w-8 xs:h-8'></FaStore>
+                            <h1>Store</h1>
+                        </Link>
+                    </li>
+                    <li className=''>
+                        <Link className='hover:underline flex flex-col items-center' to="/contact">
+                            <CiMail className='w-5 h-5 xs:w-8 xs:h-8'></CiMail>
+                            <h1>Contact</h1>
+                        </Link>
+                    </li>
                 </ul>
             </div>
             <div className='col-span-1 hover:cursor-pointer flex justify-end items-center'>
@@ -92,7 +120,7 @@ function Navbar({ userData, openLoginModal }) {
                     </button>}
             </div>
             {sideBar}
-        </div>
+        </div >
     );
 }
 
