@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import API_URL from '../config';
+import API_URL from '../../config';
 import { FaCaretUp, FaCaretDown } from "react-icons/fa";
 
 function HubStats({ userData }) {

@@ -2,6 +2,23 @@ import React from 'react';
 import { AiFillLike, AiFillDislike } from "react-icons/ai";
 
 function Thumbnail(props) {
+    const formatDate = (dateString) => {
+        const date = new Date(dateString);
+        const timeOptions = {
+            hour: 'numeric',
+            minute: 'numeric',
+            hour12: true,
+        };
+        const formattedTime = new Intl.DateTimeFormat('en-US', timeOptions).format(date);
+        const dateOptions = {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+        };
+        const formattedDate = new Intl.DateTimeFormat('en-US', dateOptions).format(date);
+        return `${formattedTime}, ${formattedDate}`;
+    };
+
     return (
         <div className='text-slate-600 flex flex-col bg-white rounded-lg p-2 sm:p-2 shadow-md'>
             <div className='flex flex-col'>
@@ -16,11 +33,11 @@ function Thumbnail(props) {
                         <div>
                             <h2 className='text-nowrap'>{props.author}</h2>
                             <p className='text-nowrap'>Noob</p>
-                            <p className='text-nowrap'>{props.date}</p>
+                            <p className='text-nowrap'>{formatDate(props.date)}</p>
                         </div>
                     </div>
                     <div className='w-[40%] text-gray-800 text-md font-medium sm:text-lg xs:font-bold flex items-center justify-end'>
-                        <div className='w-fit bg-green-300 rounded-xl p-2 xs:p-2'>
+                        <div className='w-fit bg-slate-300 rounded-xl p-2 xs:p-2'>
                             <h1 className=''>Idea</h1>
                         </div>
                     </div>

@@ -37,11 +37,10 @@ function App() {
       });
       if (res.ok) {
         if (res.status === 204) {
-          console.log("no jwt token found in browser")
+          console.log("no jwt token found in browser, not logged in")
         } else if (res.status === 201) {
           const resData = await res.json();
-          console.log("jwt token found in browser")
-          console.log(resData);
+          console.log("jwt token found in browser, logged in")
           setUserData(new UserData(true, resData.web_uuid, resData.username, resData.profileImg));
         }
       } else {

@@ -64,15 +64,15 @@ function Navbar({ userData, openLoginModal }) {
     return (
         <div className='grid grid-cols-7 justify-center items-center h-20 max-w-[1000px] mx-auto px-4 text-myblack'>
             <div className='col-span-1'>
-                <Link className='text-xl md:text-2xl font-bold text-mygreen' to="/"><h1>VanaByte</h1></Link>
+                <Link className='text-xl xs:text-2xl font-bold text-mygreen' to="/"><h1>VanaByte</h1></Link>
             </div>
             <div className='col-span-5 h-full flex items-center'>
-                <ul className="mx-auto w-fit max-w-fit flex font-medium text-sm md:text-lg uppercase space-x-1">
-                    <li className='hidden xs:block py-2 sm:py-2 bg-gray-100 shadow-md'><Link className='p-2 sm:p-3 hover:underline' to="/">Home</Link></li>
-                    <li className='hidden xs:block py-2 sm:py-2 bg-gray-100 shadow-md'><Link className='p-2 sm:p-3 hover:underline' to="/stats">Stats</Link></li>
-                    <li className='hidden xs:block py-2 sm:py-2 bg-gray-100 shadow-md'><Link className='p-2 sm:p-3 hover:underline' to="/forums">Forums</Link></li>
-                    <li className='hidden xs:block py-2 sm:py-2 bg-gray-100 shadow-md'><Link className='p-2 sm:p-3 hover:underline' to="/store">Store</Link></li>
-                    <li className='hidden xs:block py-2 sm:py-2 bg-gray-100 shadow-md'><Link className='p-2 sm:p-3 hover:underline' to="/contact">Contact</Link></li>
+                <ul className="hidden md:flex mx-auto w-fit max-w-fit font-bold text-sm md:text-lg uppercase space-x-3 text-mygray">
+                    <li className='hidden xs:block py-2 sm:py-2 bg-gray-100 shadow-md rounded-md'><Link className='p-2 sm:p-3 hover:underline' to="/">Home</Link></li>
+                    <li className='hidden xs:block py-2 sm:py-2 bg-gray-100 shadow-md rounded-md'><Link className='p-2 sm:p-3 hover:underline' to="/stats">Stats</Link></li>
+                    <li className='hidden xs:block py-2 sm:py-2 bg-gray-100 shadow-md rounded-md'><Link className='p-2 sm:p-3 hover:underline' to="/forums">Forums</Link></li>
+                    <li className='hidden xs:block py-2 sm:py-2 bg-gray-100 shadow-md rounded-md'><Link className='p-2 sm:p-3 hover:underline' to="/store">Store</Link></li>
+                    <li className='hidden xs:block py-2 sm:py-2 bg-gray-100 shadow-md rounded-md'><Link className='p-2 sm:p-3 hover:underline' to="/contact">Contact</Link></li>
                 </ul>
             </div>
             <div className='col-span-1 hover:cursor-pointer flex justify-end items-center'>

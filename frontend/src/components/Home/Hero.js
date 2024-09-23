@@ -1,6 +1,6 @@
 import React from 'react'
 import { ReactTyped } from "react-typed";
-import LOGIN_MODE from '../enums/login_mode';
+import LOGIN_MODE from '../../enums/login_mode';
 
 function Hero({ userData, openLoginModal }) {
 

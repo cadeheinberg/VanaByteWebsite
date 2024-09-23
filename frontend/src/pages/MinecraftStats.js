@@ -1,6 +1,6 @@
 import React from 'react';
 import Navbar from "../components/Navbar";
-import HubStats from "../components/HubStats";
+import HubStats from "../components/Stats/HubStats";
 import LoginModal from '../components/LoginModal';
 import Footer from "../components/Footer";
 

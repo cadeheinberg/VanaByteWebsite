@@ -1,6 +1,6 @@
 import React from 'react';
 import Navbar from "../components/Navbar";
-import PaidPlans from "../components/PaidPlans";
+import PaidPlans from "../components/Store/PaidPlans"
 import Footer from "../components/Footer";
 import LoginModal from '../components/LoginModal';
 

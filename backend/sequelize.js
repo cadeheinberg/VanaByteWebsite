@@ -9,7 +9,7 @@ const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USERNAME, pr
     logging: false
 });
 
-const User = sequelize.define(process.env.DB_TABLE_WEB_DATA, {
+const WebUserData = sequelize.define(process.env.DB_TABLE_WEB_DATA, {
     web_uuid: {
         type: DataTypes.STRING,
         primaryKey: true
@@ -19,7 +19,7 @@ const User = sequelize.define(process.env.DB_TABLE_WEB_DATA, {
         allowNull: true,
         unique: true
     },
-    name: {
+    username: {
         type: DataTypes.STRING,
         allowNull: false
     },
@@ -45,6 +45,62 @@ const User = sequelize.define(process.env.DB_TABLE_WEB_DATA, {
     tableName: process.env.DB_TABLE_WEB_DATA
 });
 
+const WebForumPosts = sequelize.define(process.env.DB_TABLE_WEB_FORUM_POSTS, {
+    post_id: {
+        type: DataTypes.STRING,
+        primaryKey: true,
+        allowNull: false
+    },
+    web_uuid: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        references: {
+            model: WebUserData,
+            key: "web_uuid"
+        }
+    },
+    username: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    profile: {
+        type: DataTypes.STRING,
+        allowNull: true
+    },
+    date: {
+        type: DataTypes.DATE,
+        allowNull: false
+    },
+    category: {
+        type: DataTypes.STRING,
+        allowNull: true
+    },
+    title: {
+        type: DataTypes.TEXT,
+        allowNull: false
+    },
+    description: {
+        type: DataTypes.TEXT,
+        allowNull: false
+    },
+    likes: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 0
+    },
+    dislikes: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 0
+    },
+    comments: {
+        type: DataTypes.TEXT,
+        allowNull: true
+    }
+}, {
+    timestamps: false,
+    tableName: process.env.DB_TABLE_WEB_FORUM_POSTS
+});
 
 const Stats = sequelize.define(process.env.DB_TABLE_MINECRAFT_STATS, {
     mc_uuid: {
@@ -122,10 +178,11 @@ const Stats = sequelize.define(process.env.DB_TABLE_MINECRAFT_STATS, {
 const syncDatabase = async () => {
     try {
         await sequelize.sync();
+        //await sequelize.sync({ force: true });
         console.log(`Tables are synced and ready`);
     } catch (err) {
         console.error('Unable to sync the database:', err);
     }
 };
 
-module.exports = { sequelize, User, Stats, syncDatabase };
+module.exports = { sequelize, WebUserData, WebForumPosts, Stats, syncDatabase };

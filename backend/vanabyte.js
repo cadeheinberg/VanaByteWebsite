@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const cookieParser = require('cookie-parser');
 const { v4: uuidv4 } = require('uuid');
-const { sequelize, User, Stats, syncDatabase } = require('./sequelize.js');
+const { sequelize, WebUserData, WebForumPosts, Stats, syncDatabase } = require('./sequelize.js');
 dotenv.config();
 const salt = 10;
 const port = 5000;
@@ -47,10 +47,10 @@ app.post("/register", async (req, res) => {
     try {
         const hashWord = await bcrypt.hash(password.toString(), salt);
         const newUserId = uuidv4();
-        const newUser = await User.create({
+        const newUser = await WebUserData.create({
             web_uuid: newUserId,
             mc_uuid: null,
-            name: username,
+            username: username,
             email: email,
             password: hashWord,
             profile: null,
@@ -69,7 +69,7 @@ app.post("/register", async (req, res) => {
 app.post("/login", async (req, res) => {
     const { email, password } = req.body;
     try {
-        const user = await User.findOne({ where: { email: email } });
+        const user = await WebUserData.findOne({ where: { email: email } });
         if (!user) {
             return res.status(401).json({ message: 'Invalid credentials' });
         }
@@ -77,7 +77,7 @@ app.post("/login", async (req, res) => {
         const isMatch = await bcrypt.compare(password, hashWord);
         if (isMatch) {
             const web_uuid = user.web_uuid;
-            const username = user.name;
+            const username = user.username;
             const token = jwt.sign({ web_uuid, username }, process.env.JWT_SECRET, { expiresIn: '1d' });
             res.cookie(process.env.JWT_COOKIE_NAME, token, {
                 httpOnly: true, //make sure the cookie can't be accessed through JavaScript
@@ -104,11 +104,63 @@ app.get("/stats", async (req, res) => {
     try {
         //raw: true option to just get a simple return, not all the sequelize jargon
         const stats = await Stats.findAll({ raw: true });
-        res.json(stats);
+        return res.json(stats);
     } catch (err) {
-        res.status(500).json({ message: "Error fetching stats" });
+        return res.status(500).json({ message: "Error fetching stats" });
     }
 });
+
+app.post("/forums", verifyUser, async (req, res) => {
+    const web_uuid = req.web_uuid
+    const { title, description, category } = req.body;
+    if (title.length < 10) return res.status(400).json({ message: "Title must be at least 10 characters long" });
+    if (title.length > 150) return res.status(400).json({ message: "Title can't be over 150 characters long" });
+    if (description.length < 10) return res.status(400).json({ message: "Description must be at least 10 characters long" });
+    if (description.length > 5000) return res.status(400).json({ message: "Description can't be over 5000 characters long" });
+    const postUser = await WebUserData.findOne({ where: { web_uuid: web_uuid }, raw: true })
+    if (!postUser) {
+        return res.status(400).json({
+            message: 'User Does not Exits!',
+        });
+    }
+    let newPostID;
+    let exists = true;
+    while (exists) {
+        newPostID = uuidv4();
+        const existingPost = await WebForumPosts.findOne({ where: { post_id: newPostID } });
+        exists = existingPost !== null;
+    }
+    const newPost = await WebForumPosts.create({
+        post_id: newPostID,
+        web_uuid: web_uuid,
+        username: postUser.username,
+        profile: postUser.profile,
+        date: new Date(),
+        category: category,
+        title: title,
+        description: description,
+        likes: 0,
+        dislikes: 0,
+        comments: null
+    });
+    if (!newPost) {
+        return res.status(400).json({
+            message: 'Post not created 701',
+        });
+    }
+    return res.status(201).json({
+        message: 'Post Created from backend',
+    });
+})
+
+app.get("/forums", async (req, res) => {
+    try {
+        const forumPosts = await WebForumPosts.findAll({ raw: true, order: [['date', 'DESC']] });
+        return res.json(forumPosts);
+    } catch (err) {
+        return res.status(500).json({ message: "Error fetching forum posts" });
+    }
+})
 
 app.listen(port, () => {
     console.log(`Listening at http://localhost:${port}`);

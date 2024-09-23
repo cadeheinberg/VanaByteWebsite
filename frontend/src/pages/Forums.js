@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import Navbar from "../components/Navbar";
-import Preview from "../components/Preview";
-import Footer from "../components/Footer";
+import Preview from "../components/Forums/Preview";
+import Footer from '../components/Footer';
 import LoginModal from '../components/LoginModal';
-import ForumHeader from '../components/ForumHeader';
-import PostEditorModal from '../components/PostEditorModal';
+import ForumHeader from '../components/Forums/ForumHeader';
+import PostEditorModal from '../components/Forums/PostEditorModal';
 import EDITOR_MODE from '../enums/editor_mode'
 
 function Forums({ userData, openLoginModal, isLoginModalOpen, closeLoginModal, displayType, setDisplayType }) {
@@ -25,6 +25,7 @@ function Forums({ userData, openLoginModal, isLoginModalOpen, closeLoginModal, d
             />
             <ForumHeader
                 userData={userData}
+                openLoginModal={openLoginModal}
                 openPostEditor={openPostEditor}
                 setPostEditorMode={setPostEditorMode}
             />

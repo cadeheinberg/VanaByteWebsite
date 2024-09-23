@@ -1,5 +1,5 @@
 const EDITOR_MODE = Object.freeze({
-    new: 'new',
+    create: 'create',
     edit: 'edit'
 });
 

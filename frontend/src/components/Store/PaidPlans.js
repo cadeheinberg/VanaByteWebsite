@@ -1,8 +1,8 @@
 import React from 'react'
 import PlanCard from './PlanCard'
-import singleImg from '../assets/iron.png'
-import doubleImg from '../assets/emerald.png'
-import tripleImg from '../assets/diamond.png'
+import singleImg from '../../assets/iron.png'
+import doubleImg from '../../assets/emerald.png'
+import tripleImg from '../../assets/diamond.png'
 // import storeImg from '../assets/Store.png'
 
 class PlanDetails {
