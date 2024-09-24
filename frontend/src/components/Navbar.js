@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import profile1 from "../assets/defaults/user1_solid.png";
 import logo from "../assets/logos/android-chrome-512x512.png"
 import { AiOutlineClose } from 'react-icons/ai';
 import API_URL from '../config';
@@ -7,10 +6,12 @@ import { Link } from 'react-router-dom'
 import { FaHome, FaStore } from "react-icons/fa";
 import { IoIosStats } from "react-icons/io";
 import { MdForum } from "react-icons/md";
-import { CiMail } from "react-icons/ci";
+import { MdPhoneInTalk } from "react-icons/md";
+import { FaMagnifyingGlass } from "react-icons/fa6";
 import LOGIN_MODE from '../enums/login_mode';
+import { getPlayerHeadUrl } from '../enums/player_head';
 
-function Navbar({ userData, openLoginModal }) {
+function Navbar({ userData, openLoginModal, noShadow }) {
     const [nav, setNav] = useState(false);
 
     const handleProfileClick = () => { setNav(!nav); };
@@ -41,15 +42,18 @@ function Navbar({ userData, openLoginModal }) {
 
             <div className='flex justify-center pb-0 pt-0'>
                 <button onClick={handleProfileClick}>
+                    <div>
+
+                    </div>
                     {userData ?
                         <img className='w-max max-w-[90px] sm:max-w-[140px]'
-                            src={profile1}
-                            alt="profile"
+                            src={getPlayerHeadUrl(userData.profile)}
+                            alt="Player Head"
                         />
                         :
                         <img className='w-max max-w-[90px] sm:max-w-[140px]'
-                            src={profile1}
-                            alt="profile"
+                            src={getPlayerHeadUrl(null)}
+                            alt="Player Head"
                         />
                     }
                 </button>
@@ -66,58 +70,58 @@ function Navbar({ userData, openLoginModal }) {
         </div >
 
     return (
-        <div className='grid grid-cols-7 justify-center items-center h-20 xs:h-28 max-w-[1000px] mx-auto text-myblack'>
-            <div className='px-2 hidden md:flex justify-center col-span-1'>
-                <Link className='' to="/"><img className='w-[60px]' src={logo} alt="logo"></img></Link>
+        <div className={`relative z-[100] px-3 grid grid-cols-11 justify-center items-center h-10 xs:h-14 mx-auto text-myblack ${noShadow ? '' : 'shadow-md'}`}>
+            <div className='pr-0 md:pr-[10%] flex flex-nowrap justify-start col-span-2'>
+                <div>
+                    <Link className='' to="/"><img className='w-[35px] min-w-[35px]' src={logo} alt="logo"></img></Link>
+                </div>
+                <div className="pl-2 flex items-center relative">
+                    <input className='px-2 w-full rounded-xl bg-gray-100 focus:border-mygreen focus:shadow-2xl focus:border-2 focus:outline-none'></input>
+                    <FaMagnifyingGlass className='absolute left-3 text-gray-300'></FaMagnifyingGlass>
+                </div>
             </div>
-            <div className='px-2 md:px-10 text-mywhite col-span-6 md:col-span-5 h-full flex items-center'>
-                <ul className="flex items-center mx-auto w-full font-bold text-xs xs:text-lg justify-between uppercase">
+            <div className='px-2 md:px-20 text-mywhite col-span-7 h-full flex items-center'>
+                <ul className="flex items-center mx-auto w-full font-medium text-xs xs:text-md justify-center space-x-[5%] md:space-x-12 uppercase">
                     <li className=''>
                         <Link className='hover:underline flex flex-col items-center' to="/">
-                            <FaHome className='w-5 h-5 xs:w-8 xs:h-8'></FaHome>
+                            <FaHome className='w-5 h-5 xs:w-6 xs:h-6'></FaHome>
                             <h1>Home</h1>
                         </Link>
                     </li>
                     <li className=''>
                         <Link className='hover:underline flex flex-col items-center' to="/stats">
-                            <IoIosStats className='w-5 h-5 xs:w-8 xs:h-8'></IoIosStats>
+                            <IoIosStats className='w-5 h-5 xs:w-6 xs:h-6'></IoIosStats>
                             <h1>Stats</h1>
                         </Link>
                     </li>
                     <li className=''>
                         <Link className='hover:underline flex flex-col items-center' to="/forums">
-                            <MdForum className='w-5 h-5 xs:w-8 xs:h-8'></MdForum>
+                            <MdForum className='w-5 h-5 xs:w-6 xs:h-6'></MdForum>
                             <h1>Forums</h1>
                         </Link>
                     </li>
                     <li className=''>
                         <Link className='hover:underline flex flex-col items-center' to="/store">
-                            <FaStore className='w-5 h-5 xs:w-8 xs:h-8'></FaStore>
+                            <FaStore className='w-5 h-5 xs:w-6 xs:h-6'></FaStore>
                             <h1>Store</h1>
                         </Link>
                     </li>
                     <li className=''>
                         <Link className='hover:underline flex flex-col items-center' to="/contact">
-                            <CiMail className='w-5 h-5 xs:w-8 xs:h-8'></CiMail>
+                            <MdPhoneInTalk className='w-5 h-5 xs:w-6 xs:h-6'></MdPhoneInTalk>
                             <h1>Contact</h1>
                         </Link>
                     </li>
                 </ul>
             </div>
-            <div className='col-span-1 hover:cursor-pointer flex justify-center items-center'>
+            <div className='col-span-2 hover:cursor-pointer flex justify-end items-center'>
                 {userData ?
                     <button onClick={handleProfileClick}>
-                        <img className='w-max max-w-[40px] xs:max-w-[55px]'
-                            src={profile1}
-                            alt="profile"
-                        />
+                        <img className='w-max max-w-[35px] xs:max-w-[35px]' src={getPlayerHeadUrl(userData.profile)} alt="Player Head" />
                     </button>
                     :
                     <button onClick={handleProfileClick}>
-                        <img className='w-max max-w-[40px] xs:max-w-[55px]'
-                            src={profile1}
-                            alt="profile"
-                        />
+                        <img className='w-max max-w-[35px] xs:max-w-[35px]' src={getPlayerHeadUrl(null)} alt="Player Head" />
                     </button>}
             </div>
             {sideBar}

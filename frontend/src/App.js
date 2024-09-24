@@ -9,11 +9,11 @@ import Store from "./pages/Store";
 import Contact from "./pages/Contact";
 
 class UserData {
-  constructor(auth = false, userId = null, userName = null, profileImg = null) {
-    this.auth = auth;
-    this.userId = userId;
-    this.userName = userName;
-    this.profileImg = profileImg;
+  constructor(auth = false, web_uuid = null, mc_uuid, username = null, profile = null) {
+    this.web_uuid = web_uuid;
+    this.mc_uuid = mc_uuid;
+    this.username = username;
+    this.profile = profile;
   }
 }
 
@@ -41,7 +41,7 @@ function App() {
         } else if (res.status === 201) {
           const resData = await res.json();
           console.log("jwt token found in browser, logged in")
-          setUserData(new UserData(true, resData.web_uuid, resData.username, resData.profileImg));
+          setUserData(new UserData(resData.web_uuid, resData.web_uuid, resData.username, resData.profile));
         }
       } else {
         setUserData(null);

@@ -1,7 +1,7 @@
 import React from 'react';
 import { AiFillLike, AiFillDislike } from "react-icons/ai";
 import categories from './Categories';
-import profile1 from "../../assets/defaults/user1_solid.png";
+import { getPlayerHeadUrl } from '../../enums/player_head';
 
 function Thumbnail({ forumPost }) {
     const formatDate = (dateString) => {
@@ -28,7 +28,7 @@ function Thumbnail({ forumPost }) {
                 <div className='flex'>
                     <div className='w-[20%] xs:w-[50px] xs:min-w-[50px]'>
                         <img className='w-fit'
-                            src={profile1}
+                            src={getPlayerHeadUrl(forumPost.profile)}
                             alt="Author"
                         />
                     </div>

@@ -13,6 +13,7 @@ function Home({ userData, openLoginModal, isLoginModalOpen, closeLoginModal, dis
             <Navbar
                 userData={userData}
                 openLoginModal={openLoginModal}
+                noShadow={true}
             />
             <Hero
                 userData={userData}

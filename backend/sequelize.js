@@ -34,7 +34,7 @@ const WebUserData = sequelize.define(process.env.DB_TABLE_WEB_DATA, {
     },
     profile: {
         type: DataTypes.STRING,
-        allowNull: true
+        allowNull: true,
     },
     role: {
         type: DataTypes.STRING,
@@ -58,14 +58,6 @@ const WebForumPosts = sequelize.define(process.env.DB_TABLE_WEB_FORUM_POSTS, {
             model: WebUserData,
             key: "web_uuid"
         }
-    },
-    username: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    profile: {
-        type: DataTypes.STRING,
-        allowNull: true
     },
     date: {
         type: DataTypes.DATE,

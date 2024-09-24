@@ -16,6 +16,18 @@ app.use(cookieParser());
 
 syncDatabase();
 
+const getUserFromDatabaseWithWebUUID = async (web_uuid) => {
+    try {
+        const user = await WebUserData.findOne({ where: { web_uuid: web_uuid } });
+        if (!user) {
+            return null;
+        }
+        return user;
+    } catch (err) {
+        return null;
+    }
+}
+
 const verifyUser = (req, res, next) => {
     const token = req.cookies[process.env.JWT_COOKIE_NAME];
     if (!token) {
@@ -34,10 +46,19 @@ const verifyUser = (req, res, next) => {
 }
 
 app.get("/", verifyUser, async (req, res) => {
+    user = getUserFromDatabaseWithWebUUID(req.web_uuid)
+    if (!user) {
+        console.error("JWT found but user not in database: ", err.message);
+        console.error("logging out of browser");
+        res.clearCookie(process.env.JWT_COOKIE_NAME);
+        return res.status(401).json({ message: 'WT found but user not in database, logging you out: ' + err.message });
+    }
     return res.status(201).json({
         message: 'Login successful',
-        web_uuid: req.web_uuid,
-        username: req.username
+        web_uuid: user.web_uuid,
+        mc_uuid: user.mc_uuid,
+        username: user.username,
+        profile: user.profile
     });
 });
 
@@ -53,7 +74,7 @@ app.post("/register", async (req, res) => {
             username: username,
             email: email,
             password: hashWord,
-            profile: null,
+            profile: 'f498513c-e8c8-4773-be26-ecfc7ed5185d',
             role: "user"
         });
         return res.status(201).json({ message: 'Registration successful' });
@@ -133,8 +154,6 @@ app.post("/forums", verifyUser, async (req, res) => {
     const newPost = await WebForumPosts.create({
         post_id: newPostID,
         web_uuid: web_uuid,
-        username: postUser.username,
-        profile: postUser.profile,
         date: new Date(),
         category: category,
         title: title,
@@ -156,7 +175,26 @@ app.post("/forums", verifyUser, async (req, res) => {
 app.get("/forums", async (req, res) => {
     try {
         const forumPosts = await WebForumPosts.findAll({ raw: true, order: [['date', 'DESC']] });
-        return res.json(forumPosts);
+        // for each forumPosts call "const user = getUserFromDatabaseWithWebUUID(forumPost.web_uuid)
+        // and attach 2 new fields to the forumPost json, 
+        // forumPost.profile = user.profile
+        // and forumPost.username = user.profile
+        const postsWithUserInfo = await Promise.all(forumPosts.map(async (post) => {
+            const user = await getUserFromDatabaseWithWebUUID(post.web_uuid);
+            if (user) {
+                return {
+                    ...post,
+                    profile: user.profile,
+                    username: user.username
+                };
+            }
+            return {
+                ...post,
+                profile: null,
+                username: null
+            };
+        }));
+        return res.json(postsWithUserInfo);
     } catch (err) {
         return res.status(500).json({ message: "Error fetching forum posts" });
     }
