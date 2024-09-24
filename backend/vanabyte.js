@@ -18,7 +18,7 @@ syncDatabase();
 
 const getUserFromDatabaseWithWebUUID = async (web_uuid) => {
     try {
-        const user = await WebUserData.findOne({ where: { web_uuid: web_uuid } });
+        const user = await WebUserData.findOne({ where: { web_uuid: web_uuid }, raw: true });
         if (!user) {
             return null;
         }
@@ -46,7 +46,7 @@ const verifyUser = (req, res, next) => {
 }
 
 app.get("/", verifyUser, async (req, res) => {
-    user = getUserFromDatabaseWithWebUUID(req.web_uuid)
+    user = await getUserFromDatabaseWithWebUUID(req.web_uuid)
     if (!user) {
         console.error("JWT found but user not in database: ", err.message);
         console.error("logging out of browser");
@@ -74,7 +74,7 @@ app.post("/register", async (req, res) => {
             username: username,
             email: email,
             password: hashWord,
-            profile: 'f498513c-e8c8-4773-be26-ecfc7ed5185d',
+            profile: null,
             role: "user"
         });
         return res.status(201).json({ message: 'Registration successful' });

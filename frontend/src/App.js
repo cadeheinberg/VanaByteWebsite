@@ -9,7 +9,7 @@ import Store from "./pages/Store";
 import Contact from "./pages/Contact";
 
 class UserData {
-  constructor(auth = false, web_uuid = null, mc_uuid, username = null, profile = null) {
+  constructor(web_uuid = null, mc_uuid = null, username = null, profile = null) {
     this.web_uuid = web_uuid;
     this.mc_uuid = mc_uuid;
     this.username = username;

@@ -9,7 +9,7 @@ import { MdForum } from "react-icons/md";
 import { MdPhoneInTalk } from "react-icons/md";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 import LOGIN_MODE from '../enums/login_mode';
-import { getPlayerHeadUrl } from '../enums/player_head';
+import { getProfilePicture } from '../enums/profle_picture';
 import hamburger from '../assets/hamburger.png'
 
 function Navbar({ userData, openLoginModal, noShadow }) {
@@ -40,7 +40,7 @@ function Navbar({ userData, openLoginModal, noShadow }) {
                 <div onClick={handleMenuToggle} className='p-4 hover:cursor-pointer'>
                     <AiOutlineClose size={30} />
                 </div>
-                <div className='w-full text-right p-4 overflow-hidden'>
+                <div className='w-full text-right p-4'>
                     <p className='italic text-lg'>{userData ? userData.username : ''}</p>
                 </div>
             </div>
@@ -48,12 +48,12 @@ function Navbar({ userData, openLoginModal, noShadow }) {
             <div className='flex justify-center pb-0 pt-0'>
                 <button onClick={handleProfileClick}>
                     {userData ?
-                        null
-                        :
                         <img className='w-max max-w-[90px] sm:max-w-[140px]'
-                            src={getPlayerHeadUrl(null)}
+                            src={getProfilePicture(userData.profile)}
                             alt="Icon For Menu"
                         />
+                        :
+                        null
                     }
                 </button>
             </div>
@@ -116,12 +116,13 @@ function Navbar({ userData, openLoginModal, noShadow }) {
             <div className='col-span-2 hover:cursor-pointer flex justify-end items-center'>
                 {userData ?
                     <button onClick={handleMenuToggle}>
-                        <img className='w-max max-w-[35px] xs:max-w-[35px]' src={hamburger} alt="Icon For Menu" />
+                        <img className='w-max max-w-[35px] xs:max-w-[35px]' src={getProfilePicture(userData.profile)} alt="Icon For Menu" />
                     </button>
                     :
                     <button onClick={handleMenuToggle}>
-                        <img className='w-max max-w-[35px] xs:max-w-[35px]' src={getPlayerHeadUrl(null)} alt="Icon For Menu" />
-                    </button>}
+                        <img className='w-max max-w-[25px] xs:max-w-[25px]' src={hamburger} alt="Icon For Menu" />
+                    </button>
+                }
             </div>
             {sideBar}
         </div >
