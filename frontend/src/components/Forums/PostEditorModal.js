@@ -13,14 +13,17 @@ const initialPostDetails = {
 function PostEditorModal({ isPostEditorOpen, closePostEditor, postEditorMode }) {
     const [postDetails, setPostDetails] = useState(initialPostDetails)
     const [postError, setPostError] = useState(null);
+    const [submitLoading, setSubmitLoading] = useState(false);
 
     const handlePostEdit = (event) => {
         event.preventDefault();
-
+        if (submitLoading) return;
     }
 
     const handlePostCreate = async (event) => {
         event.preventDefault();
+        if (submitLoading) return;
+        setSubmitLoading(true);
         try {
             const createRes = await fetch(`${API_URL}forums`, {
                 method: "POST",
@@ -39,6 +42,8 @@ function PostEditorModal({ isPostEditorOpen, closePostEditor, postEditorMode }) 
         } catch (err) {
             console.error(err.message);
             setPostError(err.message)
+        } finally {
+            setSubmitLoading(false);
         }
     }
 
@@ -64,7 +69,7 @@ function PostEditorModal({ isPostEditorOpen, closePostEditor, postEditorMode }) 
                         <p className={postError ? 'text-red-500 font-medium bg-red-100 p-2 block' : 'hidden'}>{postError}</p>
                     </div>
                     <div className='w-[80%] mx-auto mt-6 mb-4'>
-                        <button className='text-myblack bg-mygreen w-full rounded-md font-medium py-3 px-6' type='submit'>{(postEditorMode === EDITOR_MODE.create) ? 'Submit' : 'Update'}</button>
+                        <button className='text-myblack bg-mygreen w-full rounded-md font-medium py-3 px-6' type='submit' disabled={setSubmitLoading}>{(postEditorMode === EDITOR_MODE.create) ? 'Submit' : 'Update'}</button>
                     </div>
                 </div>
             </form>

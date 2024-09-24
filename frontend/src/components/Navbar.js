@@ -10,11 +10,16 @@ import { MdPhoneInTalk } from "react-icons/md";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 import LOGIN_MODE from '../enums/login_mode';
 import { getPlayerHeadUrl } from '../enums/player_head';
+import hamburger from '../assets/hamburger.png'
 
 function Navbar({ userData, openLoginModal, noShadow }) {
     const [nav, setNav] = useState(false);
 
-    const handleProfileClick = () => { setNav(!nav); };
+    const handleMenuToggle = () => { setNav(!nav); };
+
+    const handleProfileClick = () => {
+        //go to profile page
+    }
 
     const handleLogout = async () => {
         try {
@@ -32,28 +37,22 @@ function Navbar({ userData, openLoginModal, noShadow }) {
     const sideBar =
         <div className={nav ? 'text-mywhite z-50 fixed right-0 top-0 w-[50%] sm:w-[50%] md:w-[45%] lg:w-[35%] h-full shadow-2xl border-r border-l-gray-900 bg-mygray ease-in-out duration-500' : 'fixed right-[-100%]'}>
             <div className='flex items-center'>
-                <div onClick={handleProfileClick} className='p-4 hover:cursor-pointer'>
+                <div onClick={handleMenuToggle} className='p-4 hover:cursor-pointer'>
                     <AiOutlineClose size={30} />
                 </div>
-                <div className='w-full text-right p-4'>
-                    <p className='italic text-2xl'>{userData ? userData.userName : ''}</p>
+                <div className='w-full text-right p-4 overflow-hidden'>
+                    <p className='italic text-lg'>{userData ? userData.username : ''}</p>
                 </div>
             </div>
 
             <div className='flex justify-center pb-0 pt-0'>
                 <button onClick={handleProfileClick}>
-                    <div>
-
-                    </div>
                     {userData ?
-                        <img className='w-max max-w-[90px] sm:max-w-[140px]'
-                            src={getPlayerHeadUrl(userData.profile)}
-                            alt="Player Head"
-                        />
+                        null
                         :
                         <img className='w-max max-w-[90px] sm:max-w-[140px]'
                             src={getPlayerHeadUrl(null)}
-                            alt="Player Head"
+                            alt="Icon For Menu"
                         />
                     }
                 </button>
@@ -70,7 +69,7 @@ function Navbar({ userData, openLoginModal, noShadow }) {
         </div >
 
     return (
-        <div className={`relative z-[100] px-3 grid grid-cols-11 justify-center items-center h-10 xs:h-14 mx-auto text-myblack ${noShadow ? '' : 'shadow-md'}`}>
+        <div className={`relative z-[100] px-3 grid grid-cols-11 justify-center items-center h-10 xs:h-14 mx-auto text-myblack ${noShadow ? '' : 'shadow-md'}`} >
             <div className='pr-0 md:pr-[10%] flex flex-nowrap justify-start col-span-2'>
                 <div>
                     <Link className='' to="/"><img className='w-[35px] min-w-[35px]' src={logo} alt="logo"></img></Link>
@@ -116,12 +115,12 @@ function Navbar({ userData, openLoginModal, noShadow }) {
             </div>
             <div className='col-span-2 hover:cursor-pointer flex justify-end items-center'>
                 {userData ?
-                    <button onClick={handleProfileClick}>
-                        <img className='w-max max-w-[35px] xs:max-w-[35px]' src={getPlayerHeadUrl(userData.profile)} alt="Player Head" />
+                    <button onClick={handleMenuToggle}>
+                        <img className='w-max max-w-[35px] xs:max-w-[35px]' src={hamburger} alt="Icon For Menu" />
                     </button>
                     :
-                    <button onClick={handleProfileClick}>
-                        <img className='w-max max-w-[35px] xs:max-w-[35px]' src={getPlayerHeadUrl(null)} alt="Player Head" />
+                    <button onClick={handleMenuToggle}>
+                        <img className='w-max max-w-[35px] xs:max-w-[35px]' src={getPlayerHeadUrl(null)} alt="Icon For Menu" />
                     </button>}
             </div>
             {sideBar}
