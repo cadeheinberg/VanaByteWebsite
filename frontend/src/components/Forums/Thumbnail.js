@@ -50,7 +50,7 @@ function Thumbnail({ forumPost }) {
                 </div>
             </div>
             <div className='pb-1 border-b-[1px]'>
-                <p className='text-sm'>{forumPost.description.substring(0, 100)}</p>
+                <p className='text-sm'>{forumPost.description.substring(0, 150) + "..."}</p>
             </div>
             <div className='flex flex-row pt-2'>
                 <div className='flex gap-x-3 sm:gap-x-6'>

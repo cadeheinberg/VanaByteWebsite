@@ -23,7 +23,7 @@ function Navbar({ userData, openLoginModal, noShadow }) {
 
     const handleLogout = async () => {
         try {
-            const logoutResponse = await fetch(`${API_URL}logout`, {
+            const logoutResponse = await fetch(`${API_URL}v1/auth/logout`, {
                 method: "GET",
                 credentials: 'include'
             });
@@ -35,13 +35,13 @@ function Navbar({ userData, openLoginModal, noShadow }) {
     };
 
     const sideBar =
-        <div className={nav ? 'text-mywhite z-50 fixed right-0 top-0 w-[50%] sm:w-[50%] md:w-[45%] lg:w-[35%] h-full shadow-2xl border-r border-l-gray-900 bg-mygray ease-in-out duration-500' : 'fixed right-[-100%]'}>
-            <div className='flex items-center'>
-                <div onClick={handleMenuToggle} className='p-4 hover:cursor-pointer'>
-                    <AiOutlineClose size={30} />
+        <div className={nav ? 'text-mywhite z-10 fixed right-0 top-0 w-[50%] sm:w-[50%] md:w-[45%] lg:w-[35%] h-full shadow-2xl border-r border-l-gray-900 bg-mygray ease-in-out duration-500' : 'fixed right-[-100%]'}>
+            <div className='flex items-center pt-1 xs:pt-0 pb-3'>
+                <div onClick={handleMenuToggle} className='p-1 xs:p-4 hover:cursor-pointer'>
+                    <AiOutlineClose className='w-5 h-5 xs:w-6 xs:h-6' />
                 </div>
-                <div className='w-full text-right p-4'>
-                    <p className='italic text-lg'>{userData ? userData.username : ''}</p>
+                <div className='w-full text-right pr-1 xs:pr-4'>
+                    <p className='italic text-xs xs:text-lg'>{userData ? userData.username : ''}</p>
                 </div>
             </div>
 
@@ -58,7 +58,7 @@ function Navbar({ userData, openLoginModal, noShadow }) {
                 </button>
             </div>
             <ul className='p-0 uppercase'>
-                {!userData ? <li className='border-b border-gray-600 text-mygreen font-bold'><div className='p-4 hover:cursor-pointer hover:underline' onClick={() => { openLoginModal(LOGIN_MODE.login) }}>Log In</div></li> : null}
+                {!userData ? <li className='border-b border-gray-600 text-mygreen font-bold'><div className='p-4 hover:cursor-pointer hover:underline' onClick={() => { openLoginModal(LOGIN_MODE.login); handleMenuToggle(); }}>Log In</div></li> : null}
                 <li className='border-b border-gray-600'><Link className='inline-block w-full p-4 hover:cursor-pointer hover:underline' to="/">Home</Link></li>
                 <li className='border-b border-gray-600'><Link className='inline-block w-full p-4 hover:cursor-pointer hover:underline' to="/stats">Stats</Link></li>
                 <li className='border-b border-gray-600'><Link className='inline-block w-full p-4 hover:cursor-pointer hover:underline' to="/forums">Forums</Link></li>
@@ -69,18 +69,18 @@ function Navbar({ userData, openLoginModal, noShadow }) {
         </div >
 
     return (
-        <div className={`relative z-[100] px-3 grid grid-cols-11 justify-center items-center h-10 xs:h-14 mx-auto text-myblack ${noShadow ? '' : 'shadow-md'}`} >
-            <div className='pr-0 md:pr-[10%] flex flex-nowrap justify-start col-span-2'>
+        <div className={`relative z-[100] px-3 grid grid-cols-11 justify-center items-center h-14 xs:h-14 mx-auto text-myblack ${noShadow ? '' : 'shadow-md'}`} >
+            <div className='pr-0 md:pr-[10%] flex flex-nowrap justify-start col-span-8 xs:col-span-2'>
                 <div>
                     <Link className='' to="/"><img className='w-[35px] min-w-[35px]' src={logo} alt="logo"></img></Link>
                 </div>
                 <div className="pl-2 flex items-center relative">
-                    <input className='px-2 w-full rounded-xl bg-gray-100 focus:border-mygreen focus:shadow-2xl focus:border-2 focus:outline-none'></input>
+                    <input className='py-[2px] xs:py-0 px-2 w-full rounded-xl bg-gray-100 focus:border-mygreen focus:shadow-2xl focus:border-2 focus:outline-none'></input>
                     <FaMagnifyingGlass className='absolute left-3 text-gray-300'></FaMagnifyingGlass>
                 </div>
             </div>
-            <div className='px-2 md:px-20 text-mywhite col-span-7 h-full flex items-center'>
-                <ul className="flex items-center mx-auto w-full font-medium text-xs xs:text-md justify-center space-x-[5%] md:space-x-12 uppercase">
+            <div className='px-2 md:px-20 text-mywhite col-span-1 xs:col-span-7 h-full flex items-center'>
+                <ul className="hidden xs:flex items-center mx-auto w-full font-medium text-xs xs:text-md justify-center space-x-[5%] md:space-x-12 uppercase">
                     <li className=''>
                         <Link className='hover:underline flex flex-col items-center' to="/">
                             <FaHome className='w-5 h-5 xs:w-6 xs:h-6'></FaHome>

@@ -12,7 +12,7 @@ function LoginModal({ isLoginModalOpen, closeLoginModal, displayType, setDisplay
     const [loginError, setLoginError] = useState(null);
 
     const performLogin = async () => {
-        const res = await fetch(`${API_URL}login`, {
+        const res = await fetch(`${API_URL}v1/auth/login`, {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -42,16 +42,8 @@ function LoginModal({ isLoginModalOpen, closeLoginModal, displayType, setDisplay
 
     const handleRegister = async (event) => {
         event.preventDefault();
-        if (credentials.username.length < 3) {
-            setLoginError('Username must be at least 3 characters long');
-            return;
-        }
-        if (credentials.password.length < 8) {
-            setLoginError('Password must be at least 8 characters long');
-            return;
-        }
         try {
-            const registerRes = await fetch(`${API_URL}register`, {
+            const registerRes = await fetch(`${API_URL}v1/auth/register`, {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json'

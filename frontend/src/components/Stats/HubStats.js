@@ -1,8 +1,31 @@
 import React, { useEffect, useState } from "react";
 import API_URL from '../../config';
 import { FaCaretUp, FaCaretDown } from "react-icons/fa";
+import { getProfilePicture } from "../../enums/profle_picture";
 
 function HubStats({ userData }) {
+
+    const handleProfileChange = async (mc_uuid) => {
+        try {
+            const createRes = await fetch(`${API_URL}v1/stats/setProfile`, {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ mc_uuid: mc_uuid }),
+                credentials: 'include'
+            });
+            const createResData = await createRes.json();
+            if (createRes.ok) {
+                window.location.reload(true);
+            } else {
+                console.error(createResData.message)
+            }
+        } catch (err) {
+            console.error(err.message);
+        }
+    }
+
     const [playerRows, setPlayerRows] = useState([]);
     const [sortConfig, setSortConfig] = useState({
         key: 'server_cakes',
@@ -20,7 +43,7 @@ function HubStats({ userData }) {
 
     const getStats = async () => {
         try {
-            const response = await fetch(`${API_URL}stats`);
+            const response = await fetch(`${API_URL}v1/stats/getAll`);
             const arrayOfJsons = await response.json();
             setPlayerRows(arrayOfJsons);
         } catch (err) {
@@ -75,10 +98,15 @@ function HubStats({ userData }) {
                         </thead>
                         <tbody className="bg-gray-800 divide-y divide-gray-700">
                             {sortedRows.map((player, index) => (
-                                <tr key={player.mc_uuid}>
+                                <tr key={player.mc_uuid} onClick={() => handleProfileChange(player.mc_uuid)} className="hover:cursor-pointer hover:bg-gray-700">
                                     <td className="px-3 py-4 whitespace-nowrap text-sm font-medium text-gray-300">{index + 1}</td>
                                     {columns.map(column => (
-                                        <td key={column.key} className="px-3 py-4 whitespace-nowrap text-sm text-gray-300">{player[column.key]}</td>
+                                        column.key === 'playerName' ? (
+                                            <td key={column.key} className="px-3 py-4 whitespace-nowrap text-sm text-gray-300" >
+                                                <img className="w-8" src={getProfilePicture(player.mc_uuid)} alt="Player Profile"></img> {player[column.key]}</td>
+                                        ) : (
+                                            <td key={column.key} className="px-3 py-4 whitespace-nowrap text-sm text-gray-300">{player[column.key]}</td>
+                                        )
                                     ))}
                                 </tr>
                             ))}
@@ -86,7 +114,7 @@ function HubStats({ userData }) {
                     </table>
                 </div>
             </div>
-        </div>
+        </div >
     );
 }
 

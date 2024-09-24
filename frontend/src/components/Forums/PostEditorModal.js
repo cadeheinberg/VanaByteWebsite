@@ -25,7 +25,7 @@ function PostEditorModal({ isPostEditorOpen, closePostEditor, postEditorMode }) 
         if (submitLoading) return;
         setSubmitLoading(true);
         try {
-            const createRes = await fetch(`${API_URL}forums`, {
+            const createRes = await fetch(`${API_URL}v1/forum/create`, {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json'

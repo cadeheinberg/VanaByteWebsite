@@ -8,15 +8,6 @@ import Forums from "./pages/Forums";
 import Store from "./pages/Store";
 import Contact from "./pages/Contact";
 
-class UserData {
-  constructor(web_uuid = null, mc_uuid = null, username = null, profile = null) {
-    this.web_uuid = web_uuid;
-    this.mc_uuid = mc_uuid;
-    this.username = username;
-    this.profile = profile;
-  }
-}
-
 function App() {
   const [userData, setUserData] = useState(null);
   const [isLoginModalOpen, setLoginModalOpen] = useState(false);
@@ -31,19 +22,15 @@ function App() {
 
   const fetchUserData = async () => {
     try {
-      const res = await fetch(`${API_URL}`, {
+      const res = await fetch(`${API_URL}v1/auth/cookie`, {
         method: 'GET',
         credentials: 'include'
       });
+      const resData = await res.json();
       if (res.ok) {
-        if (res.status === 204) {
-          console.log("no jwt token found in browser, not logged in")
-        } else if (res.status === 201) {
-          const resData = await res.json();
-          console.log("jwt token found in browser, logged in")
-          setUserData(new UserData(resData.web_uuid, resData.web_uuid, resData.username, resData.profile));
-        }
+        setUserData(resData.user);
       } else {
+        console.log(resData.message)
         setUserData(null);
       }
     } catch (err) {
