@@ -11,6 +11,9 @@ import cookieParser from 'cookie-parser';
 const nodePort = 5000;
 
 const app = express();
+
+//use these as middleware for every route
+// CLIENT req => SERVER middleware => SERVER res
 app.use(express.json());
 app.use(cors({ origin: ["http://localhost:3000"], credentials: true }));
 app.use(cookieParser());

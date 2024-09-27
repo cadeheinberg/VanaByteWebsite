@@ -43,9 +43,12 @@ function HubStats({ userData }) {
 
     const getStats = async () => {
         try {
-            const response = await fetch(`${API_URL}v1/stats/getAll`);
-            const arrayOfJsons = await response.json();
-            setPlayerRows(arrayOfJsons);
+            const res = await fetch(`${API_URL}v1/stats/getAll`);
+            const data = await res.json();
+            if (res.ok) {
+                setPlayerRows(data)
+            }
+            console.error(data.message);
         } catch (err) {
             console.error(err.message);
         }

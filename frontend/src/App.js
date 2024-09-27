@@ -7,6 +7,7 @@ import MinecraftStats from "./pages/MinecraftStats";
 import Forums from "./pages/Forums";
 import Store from "./pages/Store";
 import Contact from "./pages/Contact";
+import PostDetails from './pages/PostDetails';
 
 function App() {
   const [userData, setUserData] = useState(null);
@@ -86,6 +87,14 @@ function App() {
           closeLoginModal={closeLoginModal}
           displayType={displayType}
           setDisplayType={setDisplayType} />}></Route>
+        <Route path='/forum/post/:post_id' element={<PostDetails
+          userData={userData}
+          openLoginModal={openLoginModal}
+          isLoginModalOpen={isLoginModalOpen}
+          closeLoginModal={closeLoginModal}
+          displayType={displayType}
+          setDisplayType={setDisplayType} />
+        } />
       </Routes>
     </BrowserRouter>
   );

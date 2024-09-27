@@ -9,7 +9,11 @@ function PostsContainer() {
         try {
             const response = await fetch(`${API_URL}v1/forum/getAll`);
             const arrayOfJsons = await response.json();
-            setForumPosts(arrayOfJsons);
+            if (response.ok) {
+                setForumPosts(arrayOfJsons);
+            } else {
+                console.error(arrayOfJsons.message);
+            }
         } catch (err) {
             console.error(err.message);
         }

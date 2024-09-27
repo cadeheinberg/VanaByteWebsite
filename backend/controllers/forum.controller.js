@@ -1,6 +1,7 @@
 import { WebUserData } from '../models/user.model.js';
 import { WebForumPost } from '../models/forum.model.js';
 import { v4 as uuidv4 } from 'uuid';
+import e from 'express';
 
 export const createForumPost = async (req, res) => {
     try {
@@ -63,8 +64,35 @@ export const getForumPosts = async (req, res) => {
                 username: postAuthor ? postAuthor.username : null,
             };
         }));
-        return res.json(postsWithUserInfo);
+        return res.status(201).json(postsWithUserInfo);
     } catch (err) {
-        return res.status(500).json({ message: "Error fetching forum posts" });
+        return res.status(404).json({ message: "Error fetching forum posts" });
+    }
+}
+
+export const getForumPost = async (req, res) => {
+    //get the post id from the URL
+    const { post_id } = req.params;
+    //is the client viewer logged in
+    const viewer = req.user;
+    try {
+        const forumPost = await WebForumPost.findOne({ where: { post_id: post_id }, raw: true });
+        if (!forumPost) {
+            return res.status(404).json({ message: "Post not found" });
+        }
+        const author = await WebUserData.findOne({ where: { web_uuid: forumPost.web_uuid }, raw: true });
+        if (!author) {
+            forumPost.author = null;
+        } else {
+            forumPost.author = author;
+            //check if viewer is logged in and if they are the author
+            if (viewer && viewer.web_uuid === author.web_uuid) {
+                forumPost.authorized = true;
+            }
+        }
+        return res.status(201).json({ post: forumPost })
+    } catch (err) {
+        console.error("Error fetching forum post:", err);
+        return res.status(500).json({ message: "Error fetching this forum post" });
     }
 }
