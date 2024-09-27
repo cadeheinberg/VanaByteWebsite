@@ -3,7 +3,7 @@ import { getForumPosts, createForumPost, getForumPost } from '../controllers/for
 import { getUserIfExists, verifyUser } from '../middleware/auth.middleware.js';
 const router = express.Router();
 
-router.get("/getAll", getForumPosts);
+router.get("/getAll", getUserIfExists, getForumPosts);
 router.get("/post/:post_id", getUserIfExists, getForumPost);
 router.post("/create", verifyUser, createForumPost);
 

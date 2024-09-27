@@ -8,6 +8,7 @@ import Forums from "./pages/Forums";
 import Store from "./pages/Store";
 import Contact from "./pages/Contact";
 import PostDetails from './pages/PostDetails';
+import NotFound from './pages/NotFound';
 
 function App() {
   const [userData, setUserData] = useState(null);
@@ -95,6 +96,9 @@ function App() {
           displayType={displayType}
           setDisplayType={setDisplayType} />
         } />
+        <Route path='*' element={
+          <NotFound></NotFound>
+        }></Route>
       </Routes>
     </BrowserRouter>
   );

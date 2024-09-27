@@ -1,14 +1,15 @@
 import React from 'react'
 import { ReactTyped } from "react-typed";
 import LOGIN_MODE from '../../enums/login_mode';
+import { Link } from 'react-router-dom'
 
 function Hero({ userData, openLoginModal }) {
 
     const welcomeMessage = userData ? 'Minecraft 1.21' : 'Minecraft 1.21';
     const precisionText = userData ? 'Join a game of' : 'Join a game of';
-    const description = userData ? `Welcome back ${userData.userName}` : 'Sign up to sync your MC account';
+    const description = userData ? `Welcome back ${userData.username}` : 'Sign up to sync your MC account';
 
-    const greenButton = userData ? <button className='text-myblack bg-mygreen w-[200px] rounded-md font-medium my-6 mx-auto py-3 px-6'>View Forums</button>
+    const greenButton = userData ? <Link to="/forums" className='text-myblack bg-mygreen w-[200px] rounded-md font-medium my-6 mx-auto py-3 px-6'>View Forums</Link>
         : <button className='text-myblack bg-mygreen w-[200px] rounded-md font-medium my-6 mx-auto py-3 px-6' onClick={() => { openLoginModal(LOGIN_MODE.register) }}>Sign Up</button>;
 
     return (

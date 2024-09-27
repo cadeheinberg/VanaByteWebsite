@@ -24,6 +24,11 @@ app.use("/v1/auth", authRoutes);
 app.use("/v1/forum", forumRoutes);
 app.use("/v1/stats", statRoutes);
 
+app.use((req, res) => {
+    console.log("Resource not found");
+    res.status(404).json({ message: "Resource not found" });
+});
+
 app.listen(nodePort, () => {
     console.log(`Listening at http://localhost:${nodePort}`);
 });

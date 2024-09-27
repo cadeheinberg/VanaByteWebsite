@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import API_URL from '../../config';
 import { useParams } from 'react-router-dom';
 import { AiFillLike, AiFillDislike } from "react-icons/ai";
@@ -92,7 +92,7 @@ function PostDetailsComponent() {
                             </div>
                         </div>
                     ) : (
-                        <h1>post not found</h1>
+                        <Fragment> </Fragment>
                     )}
                 </div>
             </div>

@@ -47,8 +47,9 @@ function HubStats({ userData }) {
             const data = await res.json();
             if (res.ok) {
                 setPlayerRows(data)
+            } else {
+                console.error(data.message);
             }
-            console.error(data.message);
         } catch (err) {
             console.error(err.message);
         }
@@ -82,7 +83,7 @@ function HubStats({ userData }) {
     return (
         <div className="bg-mywhite">
             <div className="py-8 px-4 sm:px-6 lg:px-8 mx-auto w-full max-w-[1240px] text-white">
-                <div className="shadow overflow-hidden border-b border-gray-800 sm:rounded-lg">
+                <div className="shadow overflow-scroll border-b border-gray-800 sm:rounded-lg">
                     <table className="min-w-full divide-y divide-gray-700">
                         <thead className="bg-gray-900">
                             <tr>

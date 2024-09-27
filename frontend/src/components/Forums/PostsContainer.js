@@ -7,7 +7,10 @@ function PostsContainer() {
 
     const getPosts = async () => {
         try {
-            const response = await fetch(`${API_URL}v1/forum/getAll`);
+            const response = await fetch(`${API_URL}v1/forum/getAll`, {
+                method: 'GET',
+                credentials: 'include'
+            });
             const arrayOfJsons = await response.json();
             if (response.ok) {
                 setForumPosts(arrayOfJsons);

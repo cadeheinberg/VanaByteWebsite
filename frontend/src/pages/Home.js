@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Navbar from "../components/Navbar";
 import Hero from '../components/Home/Hero';
 import NewsLetter from "../components/Home/NewsLetter";
@@ -8,6 +8,10 @@ import Footer from "../components/Footer";
 import LoginModal from '../components/LoginModal';
 
 function Home({ userData, openLoginModal, isLoginModalOpen, closeLoginModal, displayType, setDisplayType }) {
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
     return (
         <div>
             <Navbar

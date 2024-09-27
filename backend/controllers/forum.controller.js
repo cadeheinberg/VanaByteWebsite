@@ -1,7 +1,6 @@
 import { WebUserData } from '../models/user.model.js';
 import { WebForumPost } from '../models/forum.model.js';
 import { v4 as uuidv4 } from 'uuid';
-import e from 'express';
 
 export const createForumPost = async (req, res) => {
     try {
@@ -51,6 +50,8 @@ export const createForumPost = async (req, res) => {
 
 export const getForumPosts = async (req, res) => {
     try {
+        //get from getLoggedInUserIfExists middleware
+        const viewer = req.user;
         const forumPosts = await WebForumPost.findAll({ raw: true, order: [['date', 'DESC']] });
         // for each forumPosts call "const user = getUserFromDatabaseWithWebUUID(forumPost.web_uuid)
         // and attach 2 new fields to the forumPost json, 
@@ -58,10 +59,18 @@ export const getForumPosts = async (req, res) => {
         // and forumPost.username = user.profile
         const postsWithUserInfo = await Promise.all(forumPosts.map(async (post) => {
             const postAuthor = await WebUserData.findOne({ where: { web_uuid: post.web_uuid }, raw: true });
+            let authorized = false;
+            if (!postAuthor) {
+                postAuthor = null;
+            } else {
+                if (viewer && viewer.web_uuid === postAuthor.web_uuid) {
+                    authorized = true;
+                }
+            }
             return {
                 ...post,
-                profile: postAuthor ? postAuthor.profile : null,
-                username: postAuthor ? postAuthor.username : null,
+                author: postAuthor,
+                authorized: authorized
             };
         }));
         return res.status(201).json(postsWithUserInfo);
@@ -73,7 +82,7 @@ export const getForumPosts = async (req, res) => {
 export const getForumPost = async (req, res) => {
     //get the post id from the URL
     const { post_id } = req.params;
-    //is the client viewer logged in
+    //get from getLoggedInUserIfExists middleware
     const viewer = req.user;
     try {
         const forumPost = await WebForumPost.findOne({ where: { post_id: post_id }, raw: true });
