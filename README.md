@@ -97,3 +97,6 @@ dev: npm start
 
 7. //npm install -D prettier prettier-plugin-tailwindcss
 ----------------------------------------------------------------------------------------
+
+Thank you for looking!
+Cade Heinberg
