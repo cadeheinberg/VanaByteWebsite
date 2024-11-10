@@ -7,8 +7,9 @@ import statRoutes from './routes/stats.route.js';
 import { syncDatabase } from './models/sequelize.js';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
+import config from './config.js';
 
-const nodePort = 5000;
+const nodePort = config.API_PORT;
 
 const app = express();
 
