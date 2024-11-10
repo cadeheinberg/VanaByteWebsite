@@ -63,13 +63,13 @@ export const login = async (req, res) => {
         }
         const isMatch = await bcrypt.compare(password, existingUser.password);
         if (!isMatch) {
-            res.status(401).json({ message: 'Invalid credentials' });
+            return res.status(401).json({ message: 'Invalid credentials' });
         }
         const web_uuid = existingUser.web_uuid;
         const token = jwt.sign({ web_uuid }, process.env.JWT_SECRET, { expiresIn: '1d' });
         res.cookie(process.env.JWT_COOKIE_NAME, token, {
             httpOnly: true, //make sure the cookie can't be accessed through JavaScript
-            secure: process.env.NODE_ENV === 'production', //use 'secure' flag only in production
+            //secure: process.env.NODE_ENV === 'production', //use 'secure' flag only in production
             sameSite: 'Strict',
             maxAge: 24 * 60 * 60 * 1000 //1 day
         });

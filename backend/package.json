@@ -4,10 +4,10 @@
   "main": "vanabyte.js",
   "type": "module",
   "scripts": {
-    "start:dev": "NODE_ENV=development npx nodemon vanabyte.js",
-    "start:prod": "NODE_ENV=production npx pm2 start vanabyte.js --name vanabyte-app",
-    "stop:prod": "npx pm2 stop vanabyte-app",
-    "logs:prod": "npx pm2 logs vanabyte-app --lines 50"
+    "dev:start": "NODE_ENV=development npx nodemon vanabyte.js",
+    "prod:start": "NODE_ENV=production npx pm2 start vanabyte.js --name vanabyte-app",
+    "prod:stop": "npx pm2 stop vanabyte-app",
+    "prod:logs": "npx pm2 logs vanabyte-app --lines 50"
   },
   "keywords": [],
   "author": "",
