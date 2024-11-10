@@ -18,27 +18,59 @@
  2. `sudo nano /etc/apache2/sites-available/000-default.conf` (set apache to run your build folder now see below)
 6. 
 
+
+
     <VirtualHost *:80>
-        ServerName vanabyte.com
-        DocumentRoot /home/sevenkits/WebHosting/VanaByteWebsite/frontend/build
-    
-        <Directory /home/sevenkits/WebHosting/VanaByteWebsite/frontend/build>
-            Options Indexes FollowSymLinks
-            AllowOverride All
-            Require all granted
-        </Directory>
-    
-        Alias /phpmyadmin /usr/share/phpmyadmin
-        <Directory /usr/share/phpmyadmin>
-            Options Indexes FollowSymLinks
-            DirectoryIndex index.php
-            AllowOverride All
-            Require all granted
-        </Directory>
-    
-        ErrorLog ${APACHE_LOG_DIR}/error.log
-        CustomLog ${APACHE_LOG_DIR}/access.log combined
+    ServerName vanabyte.com
+    DocumentRoot /home/sevenkits/WebHosting/VanaByteWebsite/frontend/build
+
+    <Directory /home/sevenkits/WebHosting/VanaByteWebsite/frontend/build>
+        Options Indexes FollowSymLinks
+        AllowOverride All
+        Require all granted
+        FallbackResource /index.html
+    </Directory>
+
+    Alias /todolist /home/sevenkits/WebHosting/OnlineToDoList/mern-todo/frontend/build
+    <Directory /home/sevenkits/WebHosting/OnlineToDoList/mern-todo/frontend/build>
+        Options Indexes FollowSymLinks
+        AllowOverride All
+        Require all granted
+    </Directory>
+
+    Alias /notetaker /home/sevenkits/WebHosting/NoteTaker/frontend/build
+    <Directory /home/sevenkits/WebHosting/NoteTaker/frontend/build>
+        Options Indexes FollowSymLinks
+        AllowOverride All
+        Require all granted
+    </Directory>
+
+    # Proxy configuration
+    ProxyRequests Off
+    ProxyPass /api-todo http://localhost:5001
+    ProxyPassReverse /api-todo http://localhost:5001
+
+    ProxyPass /api-vana http://localhost:5000
+    ProxyPassReverse /api-vana http://localhost:5000
+
+    ProxyPass /api-notetaker http://localhost:5003
+    ProxyPassReverse /api-notetaker http://localhost:5003
+
+    Alias /phpmyadmin /usr/share/phpmyadmin
+    <Directory /usr/share/phpmyadmin>
+        Options Indexes FollowSymLinks
+        DirectoryIndex index.php
+        AllowOverride All
+        Require all granted
+    </Directory>
+
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
     </VirtualHost>
+
+
+
+
 
 ## **BACK END:**
 1. `cd backend`
