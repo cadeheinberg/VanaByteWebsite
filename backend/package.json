@@ -4,7 +4,7 @@
   "main": "vanabyte.js",
   "type": "module",
   "scripts": {
-    "start:dev": "NODE_ENV=development nodemon vanabyte.js",
+    "start:dev": "NODE_ENV=development npx nodemon vanabyte.js",
     "start:prod": "NODE_ENV=production npx pm2 start vanabyte.js --name vanabyte-app",
     "stop:prod": "npx pm2 stop vanabyte-app",
     "logs:prod": "npx pm2 logs vanabyte-app --lines 50"
