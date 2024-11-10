@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/static/css/main.c135b04c.css",
+    "main.js": "/static/js/main.a3eae389.js",
+    "static/media/arena.png": "/static/media/arena.d9de06f13d5a55a6c70f.png",
+    "static/media/under.png": "/static/media/under.3efb28da927981d87804.png",
+    "static/media/cactus.png": "/static/media/cactus.c423318ad167d5fb926b.png",
+    "static/media/ice.png": "/static/media/ice.4a5145b6ea59555c97fd.png",
+    "static/media/kits.png": "/static/media/kits.467ba17aab48493b4ac6.png",
+    "static/media/iron.png": "/static/media/iron.64c70eeb6e1dc7c2a59e.png",
+    "static/media/diamond.png": "/static/media/diamond.cc06c3af4ca26952facf.png",
+    "static/media/android-chrome-512x512.png": "/static/media/android-chrome-512x512.01874e78a61d5303823b.png",
+    "static/media/hamburger.png": "/static/media/hamburger.8c1fc02a08e6a0000f81.png",
+    "static/media/emerald.png": "/static/media/emerald.6624299020a3e9cdb5ad.png",
+    "index.html": "/index.html",
+    "main.c135b04c.css.map": "/static/css/main.c135b04c.css.map",
+    "main.a3eae389.js.map": "/static/js/main.a3eae389.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.c135b04c.css",
+    "static/js/main.a3eae389.js"
+  ]
+}
